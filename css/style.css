@@ -1,0 +1,9 @@
+.app-nav a {
+    margin: 0 6px;
+}
+.sidebar-nav {
+    padding: 0 12px;
+}
+.code-editor {
+    min-height: 400px;
+}
