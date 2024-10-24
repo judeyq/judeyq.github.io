@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Array.prototype.map() map() 方法创建一个新数组，这个新数组由原数组中的每个元素都调用一次提供的函数后的返回值组成。（每个元素都是回调函数的返回值）  1、语法  map(callbackFn) map(callbackFn,thisArg)  参数： ​		callbackFn: 为数组中的每个元素执行的函数。它的返回值作为一个元素被添加为新数组中。该函数被调用时将传入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2024/10/11/09.map%E5%92%8CforEach%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Array.prototype.map() map() 方法创建一个新数组，这个新数组由原数组中的每个元素都调用一次提供的函数后的返回值组成。（每个元素都是回调函数的返回值）  1、语法  map(callbackFn) map(callbackFn,thisArg)  参数： ​		callbackFn: 为数组中的每个元素执行的函数。它的返回值作为一个元素被添加为新数组中。该函数被调用时将传入">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-10-11T00:29:26.328Z">
+<meta property="article:modified_time" content="2024-10-11T00:29:27.347Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-09.map和forEach的区别" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/11/09.map%E5%92%8CforEach%E7%9A%84%E5%8C%BA%E5%88%AB/" class="article-date">
+  <time class="dt-published" datetime="2024-10-11T00:29:26.328Z" itemprop="datePublished">2024-10-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Array-prototype-map"><a href="#Array-prototype-map" class="headerlink" title="Array.prototype.map()"></a>Array.prototype.map()</h2><blockquote>
+<p><strong><code>map()</code></strong> 方法<strong>创建一个新数组</strong>，这个新数组由原数组中的每个元素都调用一次提供的函数后的返回值组成。（每个元素都是回调函数的返回值）</p>
+</blockquote>
+<p>1、语法</p>
+<blockquote>
+<p>map(callbackFn)</p>
+<p>map(callbackFn,thisArg)</p>
+</blockquote>
+<p>参数：</p>
+<p>​		callbackFn: 为数组中的每个元素执行的函数。它的返回值作为一个元素被添加为新数组中。该函数被调用时将传入以下参数：（1）element:数组中当前正在处理的元素（2）index:正在处理的元素在数组中的索引（3）array:调用map（）的数组本身。</p>
+<p>​		thisArg: 执行callbackFn时用作this的值</p>
+<p>map（）是一个迭代方法。为数组中每一个元素调用一次提供的callbackFn函数，并用结果构建一个新数组。</p>
+<p><code>callbackFn</code> 仅在已分配值的数组索引处被调用。它不会在<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Indexed_collections#%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84">稀疏数组</a>中的空槽处被调用。</p>
+<p>map（）不会改变this。作为callbackFn提供的函数可以更改数组。</p>
+<p>由于map创建一个新数组，在没有使用返回的数组的情况下调用它是不恰当的；应当使用forEach或者for of作为代替。</p>
+<h3 id="示例1：求数组中每个元素的平方根"><a href="#示例1：求数组中每个元素的平方根" class="headerlink" title="示例1：求数组中每个元素的平方根"></a>示例1：求数组中每个元素的平方根</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>];</span><br><span class="line"><span class="keyword">const</span> roots = numbers.<span class="title function_">map</span>(<span class="function">(<span class="params">num</span>) =&gt;</span> <span class="title class_">Math</span>.<span class="title function_">sqrt</span>(num));</span><br><span class="line"><span class="comment">// roots 现在是     [1, 2, 3]</span></span><br><span class="line"><span class="comment">// numbers 依旧是   [1, 4, 9]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="示例2：map格式化数组中的对象"><a href="#示例2：map格式化数组中的对象" class="headerlink" title="示例2：map格式化数组中的对象"></a>示例2：map格式化数组中的对象</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> kvArray = [</span><br><span class="line">  &#123; <span class="attr">key</span>: <span class="number">1</span>, <span class="attr">value</span>: <span class="number">10</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">key</span>: <span class="number">2</span>, <span class="attr">value</span>: <span class="number">20</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">key</span>: <span class="number">3</span>, <span class="attr">value</span>: <span class="number">30</span> &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> reformattedArray = kvArray.<span class="title function_">map</span>(<span class="function">(<span class="params">&#123; key, value &#125;</span>) =&gt;</span> (&#123; [key]: value &#125;));</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(reformattedArray); <span class="comment">// [&#123; 1: 10 &#125;, &#123; 2: 20 &#125;, &#123; 3: 30 &#125;]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(kvArray);</span><br><span class="line"><span class="comment">// [</span></span><br><span class="line"><span class="comment">//   &#123; key: 1, value: 10 &#125;,</span></span><br><span class="line"><span class="comment">//   &#123; key: 2, value: 20 &#125;,</span></span><br><span class="line"><span class="comment">//   &#123; key: 3, value: 30 &#125;</span></span><br><span class="line"><span class="comment">// ]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="示例3：使用单个参数的函数来映射一个数字数组"><a href="#示例3：使用单个参数的函数来映射一个数字数组" class="headerlink" title="示例3：使用单个参数的函数来映射一个数字数组"></a>示例3：使用单个参数的函数来映射一个数字数组</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当 map 循环遍历原始数组时，这个参数会自动被分配成数组中对应的每个元素。</span></span><br><span class="line"><span class="keyword">const</span> numbers = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>];</span><br><span class="line"><span class="keyword">const</span> doubles = numbers.<span class="title function_">map</span>(<span class="function">(<span class="params">num</span>) =&gt;</span> num * <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(doubles); <span class="comment">// [2, 8, 18]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(numbers); <span class="comment">// [1, 4, 9]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="示例4：非数组对象上调用map"><a href="#示例4：非数组对象上调用map" class="headerlink" title="示例4：非数组对象上调用map()"></a>示例4：非数组对象上调用map()</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// map() 方法读取 this 的 length 属性，然后访问每个整数索引。</span></span><br><span class="line"><span class="keyword">const</span> arrayLike = &#123;</span><br><span class="line">  <span class="attr">length</span>: <span class="number">3</span>,</span><br><span class="line">  <span class="number">0</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="number">3</span>,</span><br><span class="line">  <span class="number">2</span>: <span class="number">4</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">map</span>.<span class="title function_">call</span>(arrayLike, <span class="function">(<span class="params">x</span>) =&gt;</span> x ** <span class="number">2</span>));</span><br><span class="line"><span class="comment">// [ 4, 9, 16 ]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="示例5：NodeList使用map"><a href="#示例5：NodeList使用map" class="headerlink" title="示例5：NodeList使用map()"></a>示例5：NodeList使用map()</h3><p>如何去遍历通过 <code>querySelectorAll</code> 得到的对象集合。这是因为 <code>querySelectorAll</code> 返回的是一个对象集合 <code>NodeList</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> elems = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;select option:checked&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> values = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">map</span>.<span class="title function_">call</span>(elems, <span class="function">(<span class="params">&#123; value &#125;</span>) =&gt;</span> value);</span><br><span class="line"><span class="comment">// 一种更简单的方式用Array.from()</span></span><br><span class="line"><span class="comment">// 根据 DOM 元素的属性创建一个数组</span></span><br><span class="line"><span class="keyword">const</span> images = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;img&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> sources = <span class="title class_">Array</span>.<span class="title function_">from</span>(images, <span class="function">(<span class="params">image</span>) =&gt;</span> image.<span class="property">src</span>);</span><br><span class="line"><span class="keyword">const</span> insecureSources = sources.<span class="title function_">filter</span>(<span class="function">(<span class="params">link</span>)=&gt;</span>link.<span class="title function_">startsWith</span>(<span class="string">&quot;http://&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例6：稀疏数组使用map"><a href="#示例6：稀疏数组使用map" class="headerlink" title="示例6：稀疏数组使用map()"></a>示例6：稀疏数组使用map()</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 稀疏数组在使用 map() 方法后仍然是稀疏的。空槽的索引在返回的数组中仍然为空，并且回调函数不会对它们进行调用。</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(</span><br><span class="line">  [<span class="number">1</span>, , <span class="number">3</span>].<span class="title function_">map</span>(<span class="function">(<span class="params">x, index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Visit <span class="subst">$&#123;index&#125;</span>`</span>);</span><br><span class="line">    <span class="keyword">return</span> x * <span class="number">2</span>;</span><br><span class="line">  &#125;),</span><br><span class="line">);</span><br><span class="line"><span class="comment">// Visit 0</span></span><br><span class="line"><span class="comment">// Visit 2</span></span><br><span class="line"><span class="comment">// [2, empty, 6]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Array-prototype-forEach"><a href="#Array-prototype-forEach" class="headerlink" title="Array.prototype.forEach()"></a>Array.prototype.forEach()</h2><blockquote>
+<p>forEach()方法对数组的每个元素执行一次给定的函数。不会改变其调用的数组</p>
+</blockquote>
+<p>语法同map()</p>
+<p><code>forEach()</code> 方法是一个<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array#%E8%BF%AD%E4%BB%A3%E6%96%B9%E6%B3%95">迭代方法</a>。它按索引升序地为数组中的每个元素调用一次提供的 <code>callbackFn</code> 函数。与 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map"><code>map()</code></a> 不同，<code>forEach()</code> 总是返回 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined"><code>undefined</code></a>，而且不能继续链式调用。其典型的用法是在链式调用的末尾执行某些操作。</p>
+<blockquote>
+<p> 除非抛出异常，否则没有办法停止或中断 <code>forEach()</code> 循环。如果有这样的需求，则不应该使用 <code>forEach()</code> 方法。</p>
+</blockquote>
+<p>可以通过像 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for"><code>for</code></a>、<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...of"><code>for...of</code></a> 和 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in"><code>for...in</code></a> 这样的循环语句来实现提前终止。当不需要进一步迭代时，诸如 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/every"><code>every()</code></a>、<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/some"><code>some()</code></a>、<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/find"><code>find()</code></a> 和 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex"><code>findIndex()</code></a> 等数组方法也会立即停止迭代。</p>
+<p>注意：跳出循环和跳出本次循环是有区别的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 使用 forEach 跳出当前循环</span></span><br><span class="line">        <span class="keyword">const</span> array1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line">        <span class="keyword">let</span> sum1 = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        array1.<span class="title function_">forEach</span>(<span class="function">(<span class="params">element</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (element === <span class="number">3</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span>; <span class="comment">// 使用 return 跳出循环</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(element); <span class="comment">//1,2,4,5</span></span><br><span class="line">            sum1 += element;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(sum1); <span class="comment">// 输出: 12</span></span><br><span class="line"><span class="comment">// 使用 break 无法中断 forEach 循环</span></span><br><span class="line">        <span class="keyword">const</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line">        <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        array.<span class="title function_">forEach</span>(<span class="function">(<span class="params">element</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (element === <span class="number">3</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">// 使用 break 无法中断 forEach 循环</span></span><br><span class="line">            &#125;</span><br><span class="line">            sum += element;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(sum); <span class="comment">// 此行代码不会执行，因为上面的代码会抛出错误</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>forEach()</code> 期望的是一个同步函数，它不会等待 Promise 兑现。在使用 Promise（或异步函数）作为 <code>forEach</code> 回调时，请确保你意识到这一点可能带来的影响。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ratings = [<span class="number">5</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">sumFunction</span> = <span class="keyword">async</span> (<span class="params">a, b</span>) =&gt; a + b;</span><br><span class="line"></span><br><span class="line">ratings.<span class="title function_">forEach</span>(<span class="title function_">async</span> (rating) =&gt; &#123;</span><br><span class="line">  sum = <span class="keyword">await</span> <span class="title function_">sumFunction</span>(sum, rating);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(sum);</span><br><span class="line"><span class="comment">// 期望的输出：14</span></span><br><span class="line"><span class="comment">// 实际的输出：0</span></span><br></pre></td></tr></table></figure>
+
+<p>如果希望按照顺序或者并发的执行一系列操作</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[func1, func2, func3]</span><br><span class="line">  .<span class="title function_">reduce</span>(<span class="function">(<span class="params">p, f</span>) =&gt;</span> p.<span class="title function_">then</span>(f), <span class="title class_">Promise</span>.<span class="title function_">resolve</span>())</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">result3</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">/* 使用 result3 */</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>使用reduce把一个异步函数数组变为一个Promise链。上面代码等于：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Promise</span>.<span class="title function_">resolve</span>()</span><br><span class="line">  .<span class="title function_">then</span>(func1)</span><br><span class="line">  .<span class="title function_">then</span>(func2)</span><br><span class="line">  .<span class="title function_">then</span>(func3)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">result3</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">/* 使用 result3 */</span></span><br><span class="line">  &#125;);</span><br><span class="line"><span class="comment">// 也可以写成复用的函数形式</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">applyAsync</span> = (<span class="params">acc, val</span>) =&gt; acc.<span class="title function_">then</span>(val);</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">composeAsync</span> =</span><br><span class="line">  (<span class="params">...funcs</span>) =&gt;</span><br><span class="line">  <span class="function">(<span class="params">x</span>) =&gt;</span></span><br><span class="line">    funcs.<span class="title function_">reduce</span>(applyAsync, <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(x));</span><br></pre></td></tr></table></figure>
+
+<p>composeAsync函数将会接受任意数量的函数作为其参数，并返回一个新的函数，而该函数又接受一个初始值，该组合的参数传递管线如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> transformData = <span class="title function_">composeAsync</span>(func1, func2, func3);</span><br><span class="line"><span class="keyword">const</span> result3 = <span class="title function_">transformData</span>(data);</span><br></pre></td></tr></table></figure>
+
+<p>顺序组合还可以使用async和await(考虑是否真的有必要——因为它们会阻塞彼此，除非一个 Promise 的执行依赖于另一个 Promise 的结果，否则最好并发运行 Promise。)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> result;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> f <span class="keyword">of</span> [func1, func2, func3]) &#123;</span><br><span class="line">  result = <span class="keyword">await</span> <span class="title function_">f</span>(result);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 使用最后的结果（即 result3）*/</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="示例1：稀疏数组使用forEach"><a href="#示例1：稀疏数组使用forEach" class="headerlink" title="示例1：稀疏数组使用forEach()"></a>示例1：稀疏数组使用forEach()</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arraySparse = [<span class="number">1</span>, <span class="number">3</span>, <span class="comment">/* empty */</span>, <span class="number">7</span>];</span><br><span class="line"><span class="keyword">let</span> numCallbackRuns = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">arraySparse.<span class="title function_">forEach</span>(<span class="function">(<span class="params">element</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(&#123; element &#125;);</span><br><span class="line">  numCallbackRuns++;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(&#123; numCallbackRuns &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123; element: 1 &#125;</span></span><br><span class="line"><span class="comment">// &#123; element: 3 &#125;</span></span><br><span class="line"><span class="comment">// &#123; element: 7 &#125;</span></span><br><span class="line"><span class="comment">// &#123; numCallbackRuns: 3 &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="示例2：打印数组内容"><a href="#示例2：打印数组内容" class="headerlink" title="示例2：打印数组内容"></a>示例2：打印数组内容</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">logArrayElements</span> = (<span class="params">element, index <span class="comment">/*, array */</span></span>) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`a[<span class="subst">$&#123;index&#125;</span>] = <span class="subst">$&#123;element&#125;</span>`</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意，索引 2 被跳过，因为数组中这个位置没有内容</span></span><br><span class="line">[<span class="number">2</span>, <span class="number">5</span>, , <span class="number">9</span>].<span class="title function_">forEach</span>(logArrayElements);</span><br><span class="line"><span class="comment">// logs:</span></span><br><span class="line"><span class="comment">// a[0] = 2</span></span><br><span class="line"><span class="comment">// a[1] = 5</span></span><br><span class="line"><span class="comment">// a[3] = 9</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="示例3：对象复制函数"><a href="#示例3：对象复制函数" class="headerlink" title="示例3：对象复制函数"></a>示例3：对象复制函数</h3><p>创建对象副本</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">copy</span> = (<span class="params">obj</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> copy = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(obj));</span><br><span class="line">  <span class="keyword">const</span> propNames = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertyNames</span>(obj);</span><br><span class="line">  propNames.<span class="title function_">forEach</span>(<span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> desc = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertyDescriptor</span>(obj, name);</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(copy, name, desc);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> copy;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj1 = &#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> obj2 = <span class="title function_">copy</span>(obj1); <span class="comment">// 现在 obj2 看起来和 obj1 一模一样了</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="示例4：迭代期间修改数组"><a href="#示例4：迭代期间修改数组" class="headerlink" title="示例4：迭代期间修改数组"></a>示例4：迭代期间修改数组</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> words = [<span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>, <span class="string">&quot;three&quot;</span>, <span class="string">&quot;four&quot;</span>];</span><br><span class="line">words.<span class="title function_">forEach</span>(<span class="function">(<span class="params">word</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(word);</span><br><span class="line">  <span class="keyword">if</span> (word === <span class="string">&quot;two&quot;</span>) &#123;</span><br><span class="line">    words.<span class="title function_">shift</span>(); <span class="comment">//&#x27;one&#x27; 将从数组中删除</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;); <span class="comment">// one // two // four</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(words); <span class="comment">// [&#x27;two&#x27;, &#x27;three&#x27;, &#x27;four&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="示例5：非数组对象上调用forEach"><a href="#示例5：非数组对象上调用forEach" class="headerlink" title="示例5：非数组对象上调用forEach"></a>示例5：非数组对象上调用forEach</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arrayLike = &#123;</span><br><span class="line">  <span class="attr">length</span>: <span class="number">3</span>,</span><br><span class="line">  <span class="number">0</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="number">3</span>,</span><br><span class="line">  <span class="number">2</span>: <span class="number">4</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">forEach</span>.<span class="title function_">call</span>(arrayLike, <span class="function">(<span class="params">x</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(x));</span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"><span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+
+<p>map和forEach会不会改变原数组</p>
+<p>（1）、基本数据类型</p>
+<p>forEach</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">array.<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    item = item + <span class="number">1</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(array); <span class="comment">// [1,2,3,4]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>map</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">array.<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    item = item + <span class="number">1</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(array); <span class="comment">// [1,2,3,4]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>结论：数组中的元素为基本数据类型时，原数组不会改变</p>
+</blockquote>
+<p>（2）、引用数据类型</p>
+<p>forEach</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [&#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;shaka&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">23</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;virgo&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;]</span><br><span class="line">arr.<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (item.<span class="property">name</span> === <span class="string">&#x27;shaka&#x27;</span>) &#123;</span><br><span class="line">        item.<span class="property">age</span> = <span class="number">100</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr); <span class="comment">//[&#123;name: &#x27;shaka&#x27;, age: 100&#125;, &#123;name: &#x27;virgo&#x27;, age: 18&#125;]</span></span><br></pre></td></tr></table></figure>
+
+<p>map</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [&#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;shaka&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">23</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;virgo&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;]</span><br><span class="line">arr.<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (item.<span class="property">name</span> === <span class="string">&#x27;shaka&#x27;</span>) &#123;</span><br><span class="line">        item.<span class="property">age</span> = <span class="number">100</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr); <span class="comment">//[&#123;name: &#x27;shaka&#x27;, age: 100&#125;, &#123;name: &#x27;virgo&#x27;, age: 18&#125;]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>结论：数组的元素为引用类型时，原数组会改变</p>
+</blockquote>
+<p>数组的元素为引用类型时，原数组会改变的原因是什么？</p>
+<p>这是因为在使用 <code>forEach</code> 和 <code>map</code> 方法时，对<code>引用类型</code>元素的修改会直接反映在<code>原始数组</code>中。这是因为引用类型的元素实际上存储的是<code>引用（内存地址</code>），<code>而非值本身</code>。因此，通过<code>引用</code>可以访问和修改<code>原始数组</code>中的元素。基本类型在栈内存中直接存储变量与值。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
+<p><code>forEach</code> 和 <code>map</code> 的实现原理相似。它们都是通过遍历数组，对数组的每个元素执行特定的函数。区别主要在于它们处理函数返回值的方式不同。<code>forEach</code> 忽略函数的返回值，而 <code>map</code> 则将函数的返回值收集到一个新的数组中。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/11/09.map%E5%92%8CforEach%E7%9A%84%E5%8C%BA%E5%88%AB/" data-id="cm2n1iut0000q9sr3adt5go40" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/10/11/10.%E6%A8%A1%E5%9D%97%E5%8C%96/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/10/11/08.%E6%95%B0%E7%BB%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8AES6-%E6%95%99%E7%A8%8B%E3%80%8B%E7%AC%94%E8%AE%B0/">《ES6 教程》笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8AJavaScript%E6%95%99%E7%A8%8B%E3%80%8B%E7%AC%94%E8%AE%B0/">《JavaScript教程》笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/10/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bnew%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bcall%E5%92%8Capply%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bbind%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8B%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

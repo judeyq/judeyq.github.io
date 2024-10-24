@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>基础 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="说明：本章内容为博主在原教程基础上添加自己的学习笔记，来源https:&#x2F;&#x2F;wangdoc.com&#x2F;javascript&#x2F;，教程版权归原作者所有。  基础篇一、JS的一些名词概念什么是作用域？变量存在的范围。 可分为全局作用域和函数作用域，ES6新增块级作用域。 什么是闭包？闭包就是能够读取其他函数内部变量的函数。  闭包的形式：函数内部定义函数 本质上闭包就是将函数内部和外部连接起来的一座桥梁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基础">
+<meta property="og:url" content="http://example.com/pages/0796ba76b4b55368">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="说明：本章内容为博主在原教程基础上添加自己的学习笔记，来源https:&#x2F;&#x2F;wangdoc.com&#x2F;javascript&#x2F;，教程版权归原作者所有。  基础篇一、JS的一些名词概念什么是作用域？变量存在的范围。 可分为全局作用域和函数作用域，ES6新增块级作用域。 什么是闭包？闭包就是能够读取其他函数内部变量的函数。  闭包的形式：函数内部定义函数 本质上闭包就是将函数内部和外部连接起来的一座桥梁">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-01-12T03:49:16.000Z">
+<meta property="article:modified_time" content="2024-10-11T00:29:25.004Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-01.基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/pages/0796ba76b4b55368" class="article-date">
+  <time class="dt-published" datetime="2020-01-12T03:49:16.000Z" itemprop="datePublished">2020-01-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E3%80%8AJavaScript%E6%95%99%E7%A8%8B%E3%80%8B%E7%AC%94%E8%AE%B0/">《JavaScript教程》笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>说明：本章内容为博主在原教程基础上添加自己的学习笔记，来源<a target="_blank" rel="noopener" href="https://wangdoc.com/javascript/">https://wangdoc.com/javascript/</a>，教程版权归原作者所有。</p>
+</blockquote>
+<h1 id="基础篇"><a href="#基础篇" class="headerlink" title="基础篇"></a>基础篇</h1><h2 id="一、JS的一些名词概念"><a href="#一、JS的一些名词概念" class="headerlink" title="一、JS的一些名词概念"></a>一、JS的一些名词概念</h2><h4 id="什么是作用域？"><a href="#什么是作用域？" class="headerlink" title="什么是作用域？"></a>什么是作用域？</h4><p>变量存在的范围。</p>
+<p>可分为全局作用域和函数作用域，ES6新增块级作用域。</p>
+<h4 id="什么是闭包？"><a href="#什么是闭包？" class="headerlink" title="什么是闭包？"></a>什么是闭包？</h4><p>闭包就是能够读取其他函数内部变量的函数。</p>
+<ul>
+<li>闭包的形式：函数内部定义函数</li>
+<li>本质上闭包就是将函数内部和外部连接起来的一座桥梁</li>
+</ul>
+<p>闭包的作用：</p>
+<ul>
+<li>可以读取函数内部变量</li>
+<li>让这些变量始终保持在内存中，即闭包可以使得它诞生的环境一直存在。</li>
+<li>封装对象的私有属性和私有方法</li>
+</ul>
+<h4 id="什么是构造函数？"><a href="#什么是构造函数？" class="headerlink" title="什么是构造函数？"></a>什么是构造函数？</h4><p>用于构造(生成)实例的一个函数，使实例拥有构造函数内定于的属性和方法。</p>
+<h4 id="什么是实例对象？"><a href="#什么是实例对象？" class="headerlink" title="什么是实例对象？"></a>什么是实例对象？</h4><p>实例对象就是通过new 构造函数生成的，拥有构造函数内定于的属性和方法的一个对象。</p>
+<h4 id="什么是this？"><a href="#什么是this？" class="headerlink" title="什么是this？"></a>什么是this？</h4><p>就是属性或方法当前所在的对象，指向当前运行环境（对象）</p>
+<h4 id="什么是原型？"><a href="#什么是原型？" class="headerlink" title="什么是原型？"></a>什么是原型？</h4><p>每个函数都有一个prototype属性，指向一个对象，该对象称为原型对象。</p>
+<h4 id="什么是原型链？"><a href="#什么是原型链？" class="headerlink" title="什么是原型链？"></a>什么是原型链？</h4><p>所有对象都有自己的原型对象，由于原型对象也是对象，因此它也有自己的原型，这就会形成一个原型链。</p>
+<p>最顶层的原型是Object.prototype。</p>
+<blockquote>
+<p>读取对象属性时，JS会先在对象自身上找，找到就直接返回，如果找不到，会到原型上找，如果还是找不到，就会去原型的原型上找，最终会到最顶层的Object.prototype上找，还是找不到就会返回undefined。</p>
+</blockquote>
+<h4 id="什么是constructor？"><a href="#什么是constructor？" class="headerlink" title="什么是constructor？"></a>什么是constructor？</h4><p>prototype原型对象都有一个constructor属性，默认指向prototype对象所在的构造函数。</p>
+<h4 id="什么是包装对象？"><a href="#什么是包装对象？" class="headerlink" title="什么是包装对象？"></a>什么是包装对象？</h4><p>包装对象指的是将原始类型（数字、字符串、布尔值）进行实例化。</p>
+<h2 id="二、数据类型的转换"><a href="#二、数据类型的转换" class="headerlink" title="二、数据类型的转换"></a>二、数据类型的转换</h2><h3 id="1、强制（手动）转换"><a href="#1、强制（手动）转换" class="headerlink" title="1、强制（手动）转换"></a>1、强制（手动）转换</h3><p> 强制转换主要指使用<code>Number()</code>、<code>String()</code>和<code>Boolean()</code>三个函数，手动将各种类型的值，分别转换成<strong>数字、字符串、布尔值</strong>。 </p>
+<h4 id="Number"><a href="#Number" class="headerlink" title="Number()"></a>Number()</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数值：转换后还是原来的值</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="number">324</span>) <span class="comment">// 324</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 字符串：如果可以被解析为数值，则转换为相应的数值</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="string">&#x27;324&#x27;</span>) <span class="comment">// 324</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 字符串：如果不可以被解析为数值，返回 NaN</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="string">&#x27;324abc&#x27;</span>) <span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 空字符串转为0</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="string">&#x27;&#x27;</span>) <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 布尔值：true 转成 1，false 转成 0</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="literal">true</span>) <span class="comment">// 1</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="literal">false</span>) <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// undefined：转成 NaN</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="literal">undefined</span>) <span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// null：转成0</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="literal">null</span>) <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Number</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;) <span class="comment">// NaN</span></span><br><span class="line"><span class="title class_">Number</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) <span class="comment">// NaN</span></span><br><span class="line"><span class="title class_">Number</span>([<span class="number">5</span>]) <span class="comment">// 5</span></span><br><span class="line"><span class="title class_">Number</span>([]) <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用parseInt()转数组</span></span><br><span class="line"><span class="built_in">parseInt</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="String"><a href="#String" class="headerlink" title="String()"></a>String()</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原始类型的转换</span></span><br><span class="line"><span class="title class_">String</span>(<span class="number">123</span>) <span class="comment">// &quot;123&quot;</span></span><br><span class="line"><span class="title class_">String</span>(<span class="string">&#x27;abc&#x27;</span>) <span class="comment">// &quot;abc&quot;</span></span><br><span class="line"><span class="title class_">String</span>(<span class="literal">true</span>) <span class="comment">// &quot;true&quot;</span></span><br><span class="line"><span class="title class_">String</span>(<span class="literal">undefined</span>) <span class="comment">// &quot;undefined&quot;</span></span><br><span class="line"><span class="title class_">String</span>(<span class="literal">null</span>) <span class="comment">// &quot;null&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象的转换</span></span><br><span class="line"><span class="title class_">String</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;) <span class="comment">// &quot;[object Object]&quot;</span></span><br><span class="line"><span class="title class_">String</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) <span class="comment">// &quot;1,2,3&quot;</span></span><br><span class="line"><span class="title class_">String</span>([]) <span class="comment">// &quot;&quot;  空字符串</span></span><br><span class="line"><span class="title class_">String</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;) <span class="comment">// &quot;function()&#123;&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean()"></a>Boolean()</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 除了这五个为false，其他都为true</span></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="literal">undefined</span>) <span class="comment">// false</span></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="literal">null</span>) <span class="comment">// false</span></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="number">0</span>) <span class="comment">// false</span></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="title class_">NaN</span>) <span class="comment">// false</span></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="string">&#x27;&#x27;</span>) <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//true</span></span><br><span class="line"><span class="title class_">Boolean</span>(&#123;&#125;) <span class="comment">// true</span></span><br><span class="line"><span class="title class_">Boolean</span>([]) <span class="comment">// true</span></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="keyword">new</span> <span class="title class_">Boolean</span>(<span class="literal">false</span>)) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="number">1</span>) <span class="comment">// true</span></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="string">&#x27; &#x27;</span>) <span class="comment">// true // 注意字符串内有个空格</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2、自动转换"><a href="#2、自动转换" class="headerlink" title="2、自动转换"></a>2、自动转换</h3><p>下面介绍自动转换，它是<strong>以强制转换为基础的</strong>。</p>
+<p>遇到以下三种情况时，JavaScript 会自动转换数据类型，即转换是自动完成的，用户不可见。</p>
+<p>第一种情况，<strong>不同类型的数据互相运算</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">123</span> + <span class="string">&#x27;abc&#x27;</span> <span class="comment">// &quot;123abc&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p> 第二种情况，<strong>对非布尔值类型的数据求布尔值</strong>。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="string">&#x27;abc&#x27;</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">&#125;  <span class="comment">// &quot;hello&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p> 第三种情况，<strong>对非数值类型的值使用一元运算符（即<code>+</code>和<code>-</code>）</strong>。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">+ &#123;<span class="attr">foo</span>: <span class="string">&#x27;bar&#x27;</span>&#125; <span class="comment">// NaN</span></span><br><span class="line">- [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+<p>自动转换的规则是这样的：预期什么类型的值，就调用该类型的转换函数。比如，某个位置预期为字符串，就调用<code>String</code>函数进行转换。如果该位置即可以是字符串，也可能是数值，那么默认转为数值。</p>
+<p>由于自动转换具有不确定性，而且不易除错，建议在预期为布尔值、数值、字符串的地方，全部使用<code>Boolean</code>、<code>Number</code>和<code>String</code>函数进行显式转换。</p>
+<h4 id="自动转换为布尔值（Boolean）"><a href="#自动转换为布尔值（Boolean）" class="headerlink" title="自动转换为布尔值（Boolean）"></a>自动转换为布尔值（Boolean）</h4><p>JavaScript 遇到预期为布尔值的地方（比如<code>if</code>语句的条件部分），就会将非布尔值的参数自动转换为布尔值。系统内部会自动调用<code>Boolean</code>函数。</p>
+<p>因此除了以下五个值，其他都是自动转为<code>true</code>。</p>
+<ul>
+<li><code>undefined</code></li>
+<li><code>null</code></li>
+<li><code>+0</code>或<code>-0</code></li>
+<li><code>NaN</code></li>
+<li><code>&#39;&#39;</code>（空字符串）</li>
+</ul>
+<p>下面这个例子中，条件部分的每个值都相当于<code>false</code>，使用否定运算符后，就变成了<code>true</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( !<span class="literal">undefined</span></span><br><span class="line">  &amp;&amp; !<span class="literal">null</span></span><br><span class="line">  &amp;&amp; !<span class="number">0</span></span><br><span class="line">  &amp;&amp; !<span class="title class_">NaN</span></span><br><span class="line">  &amp;&amp; !<span class="string">&#x27;&#x27;</span></span><br><span class="line">) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;true&#x27;</span>);</span><br><span class="line">&#125; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>下面两种写法，有时也用于将一个表达式转为布尔值。它们内部调用的也是<code>Boolean</code>函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 三元运算符</span></span><br><span class="line">expression ? <span class="literal">true</span> : <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 取反运算符</span></span><br><span class="line">!! expression</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="自动转换为字符串（String）"><a href="#自动转换为字符串（String）" class="headerlink" title="自动转换为字符串（String）"></a>自动转换为字符串（String）</h4><p>JavaScript 遇到预期为字符串的地方，就会将非字符串的值自动转为字符串。<strong>具体规则是，先将复合类型的值转为原始类型的值，再将原始类型的值转为字符串</strong>。</p>
+<p>字符串的自动转换，<strong>主要发生在字符串的加法运算时</strong>。当一个值为字符串，另一个值为非字符串，则后者转为字符串。</p>
+<h5 id="所有类型的值与字符串相加都会变成字符串"><a href="#所有类型的值与字符串相加都会变成字符串" class="headerlink" title="所有类型的值与字符串相加都会变成字符串"></a>所有类型的值与字符串相加都会变成字符串</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;5&#x27;</span> + <span class="number">1</span> <span class="comment">// &#x27;51&#x27;</span></span><br><span class="line"> <span class="number">1</span>  + <span class="string">&#x27;5&#x27;</span> <span class="comment">// &#x27;15&#x27;</span></span><br><span class="line"><span class="string">&#x27;5&#x27;</span> + <span class="literal">true</span> <span class="comment">// &quot;5true&quot;</span></span><br><span class="line"><span class="string">&#x27;5&#x27;</span> + <span class="literal">false</span> <span class="comment">// &quot;5false&quot;</span></span><br><span class="line"><span class="string">&#x27;5&#x27;</span> + &#123;&#125; <span class="comment">// &quot;5[object Object]&quot;</span></span><br><span class="line"> <span class="number">5</span> + &#123;&#125; <span class="comment">// &quot;5[object Object]&quot;</span></span><br><span class="line"><span class="string">&#x27;5&#x27;</span> + [] <span class="comment">// &quot;5&quot;</span></span><br><span class="line"> <span class="number">5</span> + [] <span class="comment">// &quot;5&quot;</span></span><br><span class="line"><span class="string">&#x27;5&#x27;</span> + <span class="keyword">function</span> (<span class="params"></span>)&#123;&#125; <span class="comment">// &quot;5function ()&#123;&#125;&quot;</span></span><br><span class="line"><span class="string">&#x27;5&#x27;</span> + <span class="literal">undefined</span> <span class="comment">// &quot;5undefined&quot;</span></span><br><span class="line"><span class="string">&#x27;5&#x27;</span> + <span class="literal">null</span> <span class="comment">// &quot;5null&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id=""><a href="#" class="headerlink" title=""></a></h5><p>这种自动转换不注意的话很容易出错。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">width</span>: <span class="string">&#x27;100&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">obj.<span class="property">width</span> + <span class="number">20</span> <span class="comment">// &quot;10020&quot;</span></span><br><span class="line"><span class="title function_">parerInt</span>(obj.<span class="property">width</span>) + <span class="number">20</span> <span class="comment">// 120</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，开发者可能期望返回<code>120</code>，但是由于自动转换，实际上返回了一个字符<code>10020</code>。正确做法是先把字符串转成数字。</p>
+<h4 id="自动转换为数值（Number）"><a href="#自动转换为数值（Number）" class="headerlink" title="自动转换为数值（Number）"></a>自动转换为数值（Number）</h4><p>JavaScript 遇到预期为数值的地方，就会将参数值自动转换为数值。系统内部会自动调用<code>Number</code>函数。</p>
+<h5 id="除加号与字符串运行会转成字符串外，其他运行基本都会自动转成数值"><a href="#除加号与字符串运行会转成字符串外，其他运行基本都会自动转成数值" class="headerlink" title="除加号与字符串运行会转成字符串外，其他运行基本都会自动转成数值"></a>除加号与字符串运行会转成字符串外，其他运行基本都会自动转成数值</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;5&#x27;</span> - <span class="string">&#x27;2&#x27;</span> <span class="comment">// 3</span></span><br><span class="line"><span class="string">&#x27;5&#x27;</span> * <span class="string">&#x27;2&#x27;</span> <span class="comment">// 10</span></span><br><span class="line"><span class="literal">true</span> - <span class="number">1</span>  <span class="comment">// 0</span></span><br><span class="line"><span class="literal">false</span> - <span class="number">1</span> <span class="comment">// -1</span></span><br><span class="line"><span class="string">&#x27;1&#x27;</span> - <span class="number">1</span>   <span class="comment">// 0</span></span><br><span class="line"><span class="string">&#x27;5&#x27;</span> * []    <span class="comment">// 0</span></span><br><span class="line"><span class="literal">false</span> / <span class="string">&#x27;5&#x27;</span> <span class="comment">// 0</span></span><br><span class="line"><span class="string">&#x27;abc&#x27;</span> - <span class="number">1</span>   <span class="comment">// NaN</span></span><br><span class="line"><span class="literal">null</span> + <span class="number">1</span> <span class="comment">// 1</span></span><br><span class="line"><span class="literal">undefined</span> + <span class="number">1</span> <span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="literal">true</span>+<span class="literal">true</span> <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，运算符两侧的运算子，都被转成了数值。</p>
+<blockquote>
+<p>注意：<code>null</code>转为数值时为<code>0</code>，而<code>undefined</code>转为数值时为<code>NaN</code>。</p>
+</blockquote>
+<p><strong>数值与布尔值、null也会转为数值</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5</span>+<span class="literal">true</span> <span class="comment">// 6</span></span><br><span class="line"><span class="number">5</span>+<span class="literal">false</span> <span class="comment">// 5</span></span><br><span class="line"><span class="number">5</span>+<span class="literal">null</span> <span class="comment">//5</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>一元运算符也会把运算子转成数值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+<span class="string">&#x27;abc&#x27;</span> <span class="comment">// NaN</span></span><br><span class="line">-<span class="string">&#x27;abc&#x27;</span> <span class="comment">// NaN</span></span><br><span class="line">+<span class="literal">true</span> <span class="comment">// 1</span></span><br><span class="line">-<span class="literal">false</span> <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="三、错误处理机制"><a href="#三、错误处理机制" class="headerlink" title="三、错误处理机制"></a>三、错误处理机制</h2><h3 id="1、Error实例对象"><a href="#1、Error实例对象" class="headerlink" title="1、Error实例对象"></a>1、Error实例对象</h3><p>JavaScript 解析或运行时，一旦发生错误，引擎就会抛出一个错误对象。JavaScript 原生提供<code>Error</code>构造函数，所有抛出的错误都是这个构造函数的实例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> err = <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;出错了&#x27;</span>);</span><br><span class="line">err.<span class="property">message</span> <span class="comment">// &quot;出错了&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，我们调用<code>Error</code>构造函数，生成一个实例对象<code>err</code>。<code>Error</code>构造函数接受一个参数，表示错误提示，可以从实例的<code>message</code>属性读到这个参数。<strong>抛出<code>Error</code>实例对象以后，整个程序就中断在发生错误的地方，不再往下执行</strong>。</p>
+<p>JavaScript 语言标准只提到，<code>Error</code>实例对象必须有<code>message</code>属性，表示出错时的提示信息，没有提到其他属性。大多数 JavaScript 引擎，对<code>Error</code>实例还提供<code>name</code>和<code>stack</code>属性，分别表示错误的名称和错误的堆栈，但它们是非标准的，不是每种实现都有。</p>
+<ul>
+<li><strong>message</strong>：错误提示信息</li>
+<li><strong>name</strong>：错误名称（非标准属性）</li>
+<li><strong>stack</strong>：错误的堆栈（非标准属性）</li>
+</ul>
+<p>使用<code>name</code>和<code>message</code>这两个属性，可以对发生什么错误有一个大概的了解。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> err = <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;出错了&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span> (err.<span class="property">name</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(err.<span class="property">name</span> + <span class="string">&#x27;: &#x27;</span> + err.<span class="property">message</span>); <span class="comment">// Error: 出错了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <code>stack</code>属性用来查看错误发生时的堆栈。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">throwit</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">catchit</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="title function_">throwit</span>();</span><br><span class="line">  &#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">stack</span>); <span class="comment">// print stack trace</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">catchit</span>()</span><br><span class="line"><span class="comment">// Error</span></span><br><span class="line"><span class="comment">//    at throwit (~/examples/throwcatch.js:9:11) // 堆栈的最内层throwit函数</span></span><br><span class="line"><span class="comment">//    at catchit (~/examples/throwcatch.js:3:9) // 向外一层catchit函数</span></span><br><span class="line"><span class="comment">//    at repl:1:5 // 函数的运行环境</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 堆栈信息说明</span></span><br><span class="line"><span class="comment">// Error 错误</span></span><br><span class="line"><span class="comment">//    at throwit 在throwit方法 (~/examples/throwcatch.js:9:11) 文件名：第几行：第几个字符 </span></span><br><span class="line"><span class="comment">//    at catchit 在catchit方法 (~/examples/throwcatch.js:3:9) 文件名：第几行：第几个字符</span></span><br><span class="line"><span class="comment">//    at repl:1:5 // 函数的运行环境</span></span><br></pre></td></tr></table></figure>
+
+<p> 上面代码中，错误堆栈的最内层是<code>throwit</code>函数，然后是<code>catchit</code>函数，最后是函数的运行环境。 </p>
+<h3 id="2、原生错误类型"><a href="#2、原生错误类型" class="headerlink" title="2、原生错误类型"></a>2、原生错误类型</h3><p> <code>Error</code>实例对象是最一般的错误类型，在它的基础上，JavaScript 还定义了其他6种错误对象。也就是说，存在<code>Error</code>的6个派生对象。 </p>
+<h4 id="SyntaxError-对象（语法错误）"><a href="#SyntaxError-对象（语法错误）" class="headerlink" title="SyntaxError 对象（语法错误）"></a>SyntaxError 对象（语法错误）</h4><p> <code>SyntaxError</code>对象是解析代码时发生的<strong>语法错误</strong>。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 变量名错误</span></span><br><span class="line"><span class="keyword">var</span> 1a;</span><br><span class="line"><span class="comment">// Uncaught SyntaxError: Invalid or unexpected token</span></span><br><span class="line"><span class="comment">// 语法错误：无效或意外的标记符号</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 缺少括号</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="property">log</span> <span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line"><span class="comment">// Uncaught SyntaxError: Unexpected string</span></span><br><span class="line"><span class="comment">// 语法错误：意外的字符串</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码的错误，都是在语法解析阶段就可以发现，所以会抛出<code>SyntaxError</code>。第一个错误提示是“token 非法”，第二个错误提示是“字符串不符合要求”。</p>
+<h4 id="ReferenceError-对象（引用错误）"><a href="#ReferenceError-对象（引用错误）" class="headerlink" title="ReferenceError 对象（引用错误）"></a>ReferenceError 对象（引用错误）</h4><p> <code>ReferenceError</code>对象是<strong>引用一个不存在的变量时发生的错误</strong>。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用一个不存在的变量</span></span><br><span class="line">unknownVariable</span><br><span class="line"><span class="comment">// Uncaught ReferenceError: unknownVariable is not defined</span></span><br><span class="line"><span class="comment">// 引用错误： unknownVariable 没有定义</span></span><br></pre></td></tr></table></figure>
+
+<p>另一种触发场景是，将一个值分配给无法分配的对象，比如对函数的运行结果或者<code>this</code>赋值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等号左侧不是变量</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>() = <span class="number">1</span></span><br><span class="line"><span class="comment">// Uncaught ReferenceError: Invalid left-hand side in assignment</span></span><br><span class="line"><span class="comment">// 引用错误： 赋值中左边是无效的</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// this 对象不能手动赋值</span></span><br><span class="line"><span class="variable language_">this</span> = <span class="number">1</span></span><br><span class="line"><span class="comment">// ReferenceError: Invalid left-hand side in assignment</span></span><br><span class="line"><span class="comment">// 引用错误：  赋值中左边是无效的</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码对函数<code>console.log</code>的运行结果和<code>this</code>赋值，结果都引发了<code>ReferenceError</code>错误。</p>
+<h4 id="RangeError-对象（范围错误）"><a href="#RangeError-对象（范围错误）" class="headerlink" title="RangeError 对象（范围错误）"></a>RangeError 对象（范围错误）</h4><p> <code>RangeError</code>对象是一个值<strong>超出有效范围时发生的错误</strong>。主要有几种情况，一是数组长度为负数，二是<code>Number</code>对象的方法参数超出范围，以及函数堆栈超过最大值。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数组长度不得为负数</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Array</span>(-<span class="number">1</span>)</span><br><span class="line"><span class="comment">// Uncaught RangeError: Invalid array length</span></span><br><span class="line"><span class="comment">// 范围错误：无效的数组长度</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="TypeError-对象（类型错误）"><a href="#TypeError-对象（类型错误）" class="headerlink" title="TypeError 对象（类型错误）"></a>TypeError 对象（类型错误）</h4><p> <code>TypeError</code>对象是<strong>变量或参数不是预期类型时发生的错误</strong>。比如，对字符串、布尔值、数值等原始类型的值使用<code>new</code>命令，就会抛出这种错误，因为<code>new</code>命令的参数应该是一个构造函数。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="number">123</span></span><br><span class="line"><span class="comment">// Uncaught TypeError: number is not a function</span></span><br><span class="line"><span class="comment">// 类型错误： 数字不是一个函数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">obj.<span class="title function_">unknownMethod</span>()</span><br><span class="line"><span class="comment">// Uncaught TypeError: obj.unknownMethod is not a function</span></span><br><span class="line"><span class="comment">// 类型错误：obj.unknownMethod 不是一个函数</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码的第二种情况，调用对象不存在的方法，也会抛出<code>TypeError</code>错误，因为<code>obj.unknownMethod</code>的值是<code>undefined</code>，而不是一个函数。</p>
+<h4 id="URIError-对象-（URI错误）"><a href="#URIError-对象-（URI错误）" class="headerlink" title="URIError 对象 （URI错误）"></a>URIError 对象 （URI错误）</h4><p><code>URIError</code>对象是 <strong>URI 相关函数的参数不正确时抛出的错误</strong>，主要涉及<code>encodeURI()</code>、<code>decodeURI()</code>、<code>encodeURIComponent()</code>、<code>decodeURIComponent()</code>、<code>escape()</code>和<code>unescape()</code>这六个函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">decodeURI</span>(<span class="string">&#x27;%2&#x27;</span>)</span><br><span class="line"><span class="comment">// URIError: URI malformed</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="EvalError-对象-（eval错误）"><a href="#EvalError-对象-（eval错误）" class="headerlink" title="EvalError 对象 （eval错误）"></a>EvalError 对象 （eval错误）</h4><p><code>eval</code>函数没有被正确执行时，会抛出<code>EvalError</code>错误。该<strong>错误类型已经不再使用了，只是为了保证与以前代码兼容，才继续保留。</strong></p>
+<h4 id="总结（开发者手动使用）"><a href="#总结（开发者手动使用）" class="headerlink" title="总结（开发者手动使用）"></a>总结（开发者手动使用）</h4><p>以上这6种派生错误，连同原始的<code>Error</code>对象，都是构造函数。<strong>开发者可以使用它们，手动生成错误对象的实例</strong>。这些构造函数都接受一个参数，代表错误提示信息（message）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> err1 = <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;出错了！&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> err2 = <span class="keyword">new</span> <span class="title class_">RangeError</span>(<span class="string">&#x27;出错了，变量超出有效范围！&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> err3 = <span class="keyword">new</span> <span class="title class_">TypeError</span>(<span class="string">&#x27;出错了，变量类型无效！&#x27;</span>);</span><br><span class="line"></span><br><span class="line">err1.<span class="property">message</span> <span class="comment">// &quot;出错了！&quot;</span></span><br><span class="line">err2.<span class="property">message</span> <span class="comment">// &quot;出错了，变量超出有效范围！&quot;</span></span><br><span class="line">err3.<span class="property">message</span> <span class="comment">// &quot;出错了，变量类型无效！&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3、自定义错误"><a href="#3、自定义错误" class="headerlink" title="3、自定义错误"></a>3、自定义错误</h3><p> 除了 JavaScript 原生提供的七种错误对象，还可以定义自己的错误对象。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">UserError</span>(<span class="params">message</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">message</span> = message || <span class="string">&#x27;默认信息&#x27;</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;UserError&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">UserError</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title class_">Error</span>(); <span class="comment">// 原型继承 Error对象</span></span><br><span class="line"><span class="title class_">UserError</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span> = <span class="title class_">UserError</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">UserError</span>(<span class="string">&#x27;这是自定义的错误！&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>上面代码自定义一个错误对象<code>UserError</code>，让它继承<code>Error</code>对象。然后，就可以生成这种自定义类型的错误了。</p>
+<h3 id="4、throw-语句-（中断程序并抛出错误）"><a href="#4、throw-语句-（中断程序并抛出错误）" class="headerlink" title="4、throw 语句 （中断程序并抛出错误）"></a>4、throw 语句 （中断程序并抛出错误）</h3><p> <code>throw</code>语句的作用是<strong>手动中断程序执行，抛出一个错误</strong>。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (x &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;x 必须为正数&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Uncaught Error: x 必须为正数</span></span><br></pre></td></tr></table></figure>
+
+<p> 上面代码中，如果变量<code>x</code>小于等于<code>0</code>，就手动抛出一个错误，告诉用户<code>x</code>的值不正确，整个程序就会在这里中断执行。可以看到，<code>throw</code>抛出的错误就是它的参数，这里是一个<code>Error</code>实例。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">UserError</span>(<span class="params">message</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">message</span> = message || <span class="string">&#x27;默认信息&#x27;</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;UserError&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UserError</span>(<span class="string">&#x27;出错了！&#x27;</span>);</span><br><span class="line"><span class="comment">// Uncaught UserError &#123;message: &quot;出错了！&quot;, name: &quot;UserError&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p> 上面代码中，<code>throw</code>抛出的是一个<code>UserError</code>实例。 </p>
+<p>实际上，<code>throw</code>可以抛出任何类型的值。也就是说，它的参数可以是任何值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抛出一个字符串</span></span><br><span class="line"><span class="keyword">throw</span> <span class="string">&#x27;Error！&#x27;</span>;</span><br><span class="line"><span class="comment">// Uncaught Error！</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 抛出一个数值</span></span><br><span class="line"><span class="keyword">throw</span> <span class="number">42</span>;</span><br><span class="line"><span class="comment">// Uncaught 42</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 抛出一个布尔值</span></span><br><span class="line"><span class="keyword">throw</span> <span class="literal">true</span>;</span><br><span class="line"><span class="comment">// Uncaught true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 抛出一个对象</span></span><br><span class="line"><span class="keyword">throw</span> &#123;</span><br><span class="line">  <span class="attr">toString</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Error!&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// Uncaught &#123;toString: ƒ&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p> 对于 JavaScript 引擎来说，<strong>遇到<code>throw</code>语句，程序就中止了</strong>。引擎会接收到<code>throw</code>抛出的信息，可能是一个错误实例，也可能是其他类型的值。 </p>
+<h3 id="5、try…catch-结构（捕获错误，对错误进行处理，不中断）"><a href="#5、try…catch-结构（捕获错误，对错误进行处理，不中断）" class="headerlink" title="5、try…catch 结构（捕获错误，对错误进行处理，不中断）"></a>5、try…catch 结构（捕获错误，对错误进行处理，不中断）</h3><p> 一旦发生错误，程序就中止执行了。JavaScript 提供了<code>try...catch</code>结构，<strong>允许对错误进行处理</strong>，选择是否往下执行。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;出错了!&#x27;</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">name</span> + <span class="string">&quot;: &quot;</span> + e.<span class="property">message</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">stack</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Error: 出错了!</span></span><br><span class="line"><span class="comment">//   at &lt;anonymous&gt;:3:9</span></span><br><span class="line"><span class="comment">//   ...</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>try</code>代码块抛出错误（上例用的是<code>throw</code>语句），JavaScript 引擎就立即把代码的执行，转到<code>catch</code>代码块，或者说错误被<code>catch</code>代码块捕获了。<code>catch</code>接受一个参数，表示<code>try</code>代码块抛出的值。</p>
+<p>如果你不确定某些代码是否会报错，就可以把它们放在<code>try...catch</code>代码块之中，便于进一步对错误进行处理。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="title function_">f</span>();</span><br><span class="line">&#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">  <span class="comment">// 处理错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，如果函数<code>f</code>执行报错，就会进行<code>catch</code>代码块，接着对错误进行处理。</p>
+<p><code>catch</code>代码块捕获错误之后，<strong>程序不会中断</strong>，会按照正常流程继续执行下去。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="string">&quot;出错了&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">111</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">222</span>);</span><br><span class="line"><span class="comment">// 111</span></span><br><span class="line"><span class="comment">// 222</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>try</code>代码块抛出的错误，被<code>catch</code>代码块捕获后，程序会继续向下执行。</p>
+<p><code>catch</code>代码块之中，还可以再抛出错误，甚至使用嵌套的<code>try...catch</code>结构。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> n = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">throw</span> n;</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="keyword">if</span> (e &lt;= <span class="number">50</span>) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> e;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Uncaught 100</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>catch</code>代码之中又抛出了一个错误。</p>
+<p>为了<strong>捕捉不同类型的错误</strong>，<code>catch</code>代码块之中可以加入判断语句。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  foo.<span class="title function_">bar</span>();</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="keyword">if</span> (e <span class="keyword">instanceof</span> <span class="title class_">EvalError</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">name</span> + <span class="string">&quot;: &quot;</span> + e.<span class="property">message</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (e <span class="keyword">instanceof</span> <span class="title class_">RangeError</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">name</span> + <span class="string">&quot;: &quot;</span> + e.<span class="property">message</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>catch</code>捕获错误之后，会判断错误类型（<code>EvalError</code>还是<code>RangeError</code>），进行不同的处理。</p>
+<h3 id="6、finally-代码块（在try-catch最后，必执行的）"><a href="#6、finally-代码块（在try-catch最后，必执行的）" class="headerlink" title="6、finally 代码块（在try..catch最后，必执行的）"></a>6、finally 代码块（在try..catch最后，必执行的）</h3><p> <code>try...catch</code>结构允许在最后添加一个<code>finally</code>代码块，表示<strong>不管是否出现错误，都必需在最后运行的语句</strong>。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">cleansUp</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;出错了……&#x27;</span>);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;此行不会执行&#x27;</span>);</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123; <span class="comment">// 不管有没有出错都会执行finally</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;完成清理工作&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;此行不会执行&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">cleansUp</span>()</span><br><span class="line"><span class="comment">// 完成清理工作</span></span><br><span class="line"><span class="comment">// Uncaught Error: 出错了…… </span></span><br><span class="line"><span class="comment">//    at cleansUp (&lt;anonymous&gt;:3:11)</span></span><br><span class="line"><span class="comment">//    at &lt;anonymous&gt;:10:1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 由于没有catch语句，所以会打印出错误信息，并中断除finally以外的代码。</span></span><br><span class="line"><span class="comment">// 如果有catch语句则会执行catch内的代码块，而不会打印错误信息。且不会中断代码。</span></span><br></pre></td></tr></table></figure>
+
+<p> 上面代码中，由于没有<code>catch</code>语句块，一旦发生错误，代码就会中断执行。中断执行之前，会先执行<code>finally</code>代码块，然后再向用户提示报错信息。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">idle</span>(<span class="params">x</span>) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(x);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;result&#x27;</span>;</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;FINALLY&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">idle</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line"><span class="comment">// hello</span></span><br><span class="line"><span class="comment">// FINALLY</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>try</code>代码块没有发生错误，而且里面还包括<code>return</code>语句，但是<code>finally</code>代码块依然会执行。而且，这个函数的返回值还是<code>result</code>。</p>
+<p>下面的例子说明，<code>return</code>语句的执行是排在<code>finally</code>代码之前，只是等<code>finally</code>代码执行完毕后才返回。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">countUp</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    count++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">countUp</span>()</span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line">count</span><br><span class="line"><span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码说明，<code>return</code>语句里面的<code>count</code>的值，是在<code>finally</code>代码块运行之前就获取了。</p>
+<p>下面是<code>finally</code>代码块用法的<strong>典型场景</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">openFile</span>(); <span class="comment">// 打开文件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="title function_">writeFile</span>(<span class="title class_">Data</span>); <span class="comment">// 写入文件</span></span><br><span class="line">&#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">  <span class="title function_">handleError</span>(e); <span class="comment">// 如果写入出错这处理错误</span></span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">  <span class="title function_">closeFile</span>();<span class="comment">// 不管是否出错都会执行关闭文件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码首先打开一个文件，然后在<code>try</code>代码块中写入文件，如果没有发生错误，则运行<code>finally</code>代码块关闭文件；一旦发生错误，则先使用<code>catch</code>代码块处理错误，再使用<code>finally</code>代码块关闭文件。</p>
+<p>下面的例子充分反映了<code>try...catch...finally</code>这三者之间的<strong>执行顺序</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">f</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">throw</span> <span class="string">&#x27;bug&#x27;</span>;</span><br><span class="line">  &#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">// 这句原本会延迟到 finally 代码块结束再执行</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>); <span class="comment">// 不会运行</span></span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 这句会覆盖掉前面那句 return</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">4</span>); <span class="comment">// 不会运行</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">5</span>); <span class="comment">// 不会运行</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = <span class="title function_">f</span>();</span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line">result</span><br><span class="line"><span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>catch</code>代码块结束执行之前，会先执行<code>finally</code>代码块。</p>
+<p><code>catch</code>代码块之中，触发转入<code>finally</code>代码块的标志，不仅有<code>return</code>语句，还有<code>throw</code>语句。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">f</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="string">&#x27;出错了！&#x27;</span>;</span><br><span class="line">  &#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;捕捉到内部错误&#x27;</span>);</span><br><span class="line">    <span class="keyword">throw</span> e; <span class="comment">// 这句原本会等到finally结束再执行</span></span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 直接返回</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="title function_">f</span>(); <span class="comment">// 接收到返回值false，并没有接收到错误</span></span><br><span class="line">&#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">  <span class="comment">// 此处不会执行</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;caught outer &quot;bogus&quot;&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  捕捉到内部错误</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，进入<code>catch</code>代码块之后，一遇到<code>throw</code>语句，就会去执行<code>finally</code>代码块，其中有<code>return false</code>语句，因此就直接返回了，不再会回去执行<code>catch</code>代码块剩下的部分了。</p>
+<p><code>try</code>代码块内部，还可以再使用<code>try</code>代码块。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    consle.<span class="title function_">log</span>(<span class="string">&#x27;Hello world!&#x27;</span>); <span class="comment">// 报错，console拼错</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Finally&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Will I run?&#x27;</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span>(error) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">error</span>(error.<span class="property">message</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Finally</span></span><br><span class="line"><span class="comment">// consle is not defined</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>try</code>里面还有一个<code>try</code>。内层的<code>try</code>报错（<code>console</code>拼错了），这时会执行内层的<code>finally</code>代码块，然后抛出错误，被外层的<code>catch</code>捕获。</p>
+<h2 id="四、console对象"><a href="#四、console对象" class="headerlink" title="四、console对象"></a>四、console对象</h2><h3 id="console-time-，console-timeEnd-（用于计算程序的用时）"><a href="#console-time-，console-timeEnd-（用于计算程序的用时）" class="headerlink" title="console.time()，console.timeEnd() （用于计算程序的用时）"></a>console.time()，console.timeEnd() （用于计算程序的用时）</h3><p>这两个方法用于计时，可以算出一个操作所花费的准确时间。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">console.time(&#x27;Array initialize&#x27;);</span><br><span class="line"></span><br><span class="line">var array= new Array(1000000);</span><br><span class="line">for (var i = array.length - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">  array[i] = new Object();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">console.timeEnd(&#x27;Array initialize&#x27;);</span><br><span class="line">// Array initialize: 1914.481ms</span><br></pre></td></tr></table></figure>
+
+<p><code>time</code>方法表示计时开始，<code>timeEnd</code>方法表示计时结束。它们的参数是计时器的名称。调用<code>timeEnd</code>方法之后，控制台会显示“计时器名称: 所耗费的时间”。</p>
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p>学习文档：<a target="_blank" rel="noopener" href="https://wangdoc.com/javascript/">https://wangdoc.com/javascript/</a> </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/pages/0796ba76b4b55368" data-id="cm2n1iusl00019sr395c1hq6f" data-title="基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/pages/f344d070a1031ef7" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ECMAScript 6 简介
+        
+      </div>
+    </a>
+  
+  
+    <a href="/pages/74d2ab3fbfeaaa68" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">内置对象</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8AES6-%E6%95%99%E7%A8%8B%E3%80%8B%E7%AC%94%E8%AE%B0/">《ES6 教程》笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8AJavaScript%E6%95%99%E7%A8%8B%E3%80%8B%E7%AC%94%E8%AE%B0/">《JavaScript教程》笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/10/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bnew%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bcall%E5%92%8Capply%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bbind%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8B%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

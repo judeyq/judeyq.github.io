@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="JavaScript专题之从零实现jQuery的extend前言jQuery 的 extend 是 jQuery 中应用非常多的一个函数，今天我们一边看 jQuery 的 extend 的特性，一边实现一个 extend! extend 基本用法先来看看 extend 的功能，引用 jQuery 官网：  Merge the contents of two or more objects toge">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2024/10/11/JavaScript%E4%B8%93%E9%A2%98%E4%B9%8B%E4%BB%8E%E9%9B%B6%E5%AE%9E%E7%8E%B0jQuery%E7%9A%84extend/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="JavaScript专题之从零实现jQuery的extend前言jQuery 的 extend 是 jQuery 中应用非常多的一个函数，今天我们一边看 jQuery 的 extend 的特性，一边实现一个 extend! extend 基本用法先来看看 extend 的功能，引用 jQuery 官网：  Merge the contents of two or more objects toge">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.com/mqyqingfeng/Blog/raw/master/Images/extend/extend1.png">
+<meta property="article:published_time" content="2024-10-11T00:29:57.103Z">
+<meta property="article:modified_time" content="2024-10-11T00:29:57.661Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/mqyqingfeng/Blog/raw/master/Images/extend/extend1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-JavaScript专题之从零实现jQuery的extend" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/11/JavaScript%E4%B8%93%E9%A2%98%E4%B9%8B%E4%BB%8E%E9%9B%B6%E5%AE%9E%E7%8E%B0jQuery%E7%9A%84extend/" class="article-date">
+  <time class="dt-published" datetime="2024-10-11T00:29:57.103Z" itemprop="datePublished">2024-10-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript专题之从零实现jQuery的extend"><a href="#JavaScript专题之从零实现jQuery的extend" class="headerlink" title="JavaScript专题之从零实现jQuery的extend"></a>JavaScript专题之从零实现jQuery的extend</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>jQuery 的 extend 是 jQuery 中应用非常多的一个函数，今天我们一边看 jQuery 的 extend 的特性，一边实现一个 extend!</p>
+<h2 id="extend-基本用法"><a href="#extend-基本用法" class="headerlink" title="extend 基本用法"></a>extend 基本用法</h2><p>先来看看 extend 的功能，引用 jQuery 官网：</p>
+<blockquote>
+<p>Merge the contents of two or more objects together into the first object.</p>
+</blockquote>
+<p>翻译过来就是，合并两个或者更多的对象的内容到第一个对象中。</p>
+<p>让我们看看 extend 的用法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jQuery.<span class="title function_">extend</span>( target [, object1 ] [, objectN ] )</span><br></pre></td></tr></table></figure>
+
+<p>第一个参数 target，表示要拓展的目标，我们就称它为目标对象吧。</p>
+<p>后面的参数，都传入对象，内容都会复制到目标对象中，我们就称它们为待复制对象吧。</p>
+<p>举个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">b</span>: &#123; <span class="attr">b1</span>: <span class="number">1</span>, <span class="attr">b2</span>: <span class="number">2</span> &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;</span><br><span class="line">    <span class="attr">b</span>: &#123; <span class="attr">b1</span>: <span class="number">3</span>, <span class="attr">b3</span>: <span class="number">4</span> &#125;,</span><br><span class="line">    <span class="attr">c</span>: <span class="number">3</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj3 = &#123;</span><br><span class="line">    <span class="attr">d</span>: <span class="number">4</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>($.<span class="title function_">extend</span>(obj1, obj2, obj3));</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//    a: 1,</span></span><br><span class="line"><span class="comment">//    b: &#123; b1: 3, b3: 4 &#125;,</span></span><br><span class="line"><span class="comment">//    c: 3,</span></span><br><span class="line"><span class="comment">//    d: 4</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>当两个对象出现相同字段的时候，后者会覆盖前者，而不会进行深层次的覆盖。</p>
+<h2 id="extend-第一版"><a href="#extend-第一版" class="headerlink" title="extend 第一版"></a>extend 第一版</h2><p>结合着上篇写得 <a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/32">《JavaScript专题之深浅拷贝》</a>，我们尝试着自己写一个 extend 函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一版</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">extend</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> name, options, copy;</span><br><span class="line">    <span class="keyword">var</span> length = <span class="variable language_">arguments</span>.<span class="property">length</span>;</span><br><span class="line">    <span class="keyword">var</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">var</span> target = <span class="variable language_">arguments</span>[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (; i &lt; length; i++) &#123;</span><br><span class="line">        options = <span class="variable language_">arguments</span>[i];</span><br><span class="line">        <span class="keyword">if</span> (options != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (name <span class="keyword">in</span> options) &#123;</span><br><span class="line">                copy = options[name];</span><br><span class="line">                <span class="keyword">if</span> (copy !== <span class="literal">undefined</span>)&#123;</span><br><span class="line">                    target[name] = copy;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> target;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="extend-深拷贝"><a href="#extend-深拷贝" class="headerlink" title="extend 深拷贝"></a>extend 深拷贝</h2><p>那如何进行深层次的复制呢？jQuery v1.1.4 加入了一个新的用法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jQuery.<span class="title function_">extend</span>( [deep], target, object1 [, objectN ] )</span><br></pre></td></tr></table></figure>
+
+<p>也就是说，函数的第一个参数可以传一个布尔值，如果为 true，我们就会进行深拷贝，false 依然当做浅拷贝，这个时候，target 就往后移动到第二个参数。</p>
+<p>还是举这个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">b</span>: &#123; <span class="attr">b1</span>: <span class="number">1</span>, <span class="attr">b2</span>: <span class="number">2</span> &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;</span><br><span class="line">    <span class="attr">b</span>: &#123; <span class="attr">b1</span>: <span class="number">3</span>, <span class="attr">b3</span>: <span class="number">4</span> &#125;,</span><br><span class="line">    <span class="attr">c</span>: <span class="number">3</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj3 = &#123;</span><br><span class="line">    <span class="attr">d</span>: <span class="number">4</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>($.<span class="title function_">extend</span>(<span class="literal">true</span>, obj1, obj2, obj3));</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//    a: 1,</span></span><br><span class="line"><span class="comment">//    b: &#123; b1: 3, b2: 2, b3: 4 &#125;,</span></span><br><span class="line"><span class="comment">//    c: 3,</span></span><br><span class="line"><span class="comment">//    d: 4</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>因为采用了深拷贝，会遍历到更深的层次进行添加和覆盖。</p>
+<h2 id="extend-第二版"><a href="#extend-第二版" class="headerlink" title="extend 第二版"></a>extend 第二版</h2><p>我们来实现深拷贝的功能，值得注意的是：</p>
+<ol>
+<li>需要根据第一个参数的类型，确定 target 和要合并的对象的下标起始值。</li>
+<li>如果是深拷贝，根据 copy 的类型递归 extend。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第二版</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">extend</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 默认不进行深拷贝</span></span><br><span class="line">    <span class="keyword">var</span> deep = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">var</span> name, options, src, copy;</span><br><span class="line">    <span class="keyword">var</span> length = <span class="variable language_">arguments</span>.<span class="property">length</span>;</span><br><span class="line">    <span class="comment">// 记录要复制的对象的下标</span></span><br><span class="line">    <span class="keyword">var</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 第一个参数不传布尔值的情况下，target默认是第一个参数</span></span><br><span class="line">    <span class="keyword">var</span> target = <span class="variable language_">arguments</span>[<span class="number">0</span>] || &#123;&#125;;</span><br><span class="line">    <span class="comment">// 如果第一个参数是布尔值，第二个参数是才是target</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> target == <span class="string">&#x27;boolean&#x27;</span>) &#123;</span><br><span class="line">        deep = target;</span><br><span class="line">        target = <span class="variable language_">arguments</span>[i] || &#123;&#125;;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 如果target不是对象，我们是无法进行复制的，所以设为&#123;&#125;</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> target !== <span class="string">&#x27;object&#x27;</span>) &#123;</span><br><span class="line">        target = &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 循环遍历要复制的对象们</span></span><br><span class="line">    <span class="keyword">for</span> (; i &lt; length; i++) &#123;</span><br><span class="line">        <span class="comment">// 获取当前对象</span></span><br><span class="line">        options = <span class="variable language_">arguments</span>[i];</span><br><span class="line">        <span class="comment">// 要求不能为空 避免extend(a,,b)这种情况</span></span><br><span class="line">        <span class="keyword">if</span> (options != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (name <span class="keyword">in</span> options) &#123;</span><br><span class="line">                <span class="comment">// 目标属性值</span></span><br><span class="line">                src = target[name];</span><br><span class="line">                <span class="comment">// 要复制的对象的属性值</span></span><br><span class="line">                copy = options[name];</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (deep &amp;&amp; copy &amp;&amp; <span class="keyword">typeof</span> copy == <span class="string">&#x27;object&#x27;</span>) &#123;</span><br><span class="line">                    <span class="comment">// 递归调用</span></span><br><span class="line">                    target[name] = <span class="title function_">extend</span>(deep, src, copy);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (copy !== <span class="literal">undefined</span>)&#123;</span><br><span class="line">                    target[name] = copy;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> target;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在实现上，核心的部分还是跟上篇实现的深浅拷贝函数一致，如果要复制的对象的属性值是一个对象，就递归调用 extend。不过 extend 的实现中，多了很多细节上的判断，比如第一个参数是否是布尔值，target 是否是一个对象，不传参数时的默认值等。</p>
+<p>接下来，我们看几个 jQuery 的 extend 使用效果：</p>
+<h2 id="target-是函数"><a href="#target-是函数" class="headerlink" title="target 是函数"></a>target 是函数</h2><p>在我们的实现中，<code>typeof target</code> 必须等于 <code>object</code>，我们才会在这个 <code>target</code> 基础上进行拓展，然而我们用 <code>typeof</code> 判断一个函数时，会返回<code>function</code>，也就是说，我们无法在一个函数上进行拓展！</p>
+<p>什么，我们还能在一个函数上进行拓展！！</p>
+<p>当然啦，毕竟函数也是一种对象嘛，让我们看个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">a</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">a.<span class="property">target</span> = <span class="string">&#x27;b&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a.<span class="property">target</span>); <span class="comment">// b</span></span><br></pre></td></tr></table></figure>
+
+<p>实际上，在 underscore 的实现中，underscore 的各种方法便是挂在了函数上！</p>
+<p>所以在这里我们还要判断是不是函数，这时候我们便可以使用<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/28">《JavaScript专题之类型判断(上)》</a>中写得 isFunction 函数</p>
+<p>我们这样修改：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> target !== <span class="string">&quot;object&quot;</span> &amp;&amp; !<span class="title function_">isFunction</span>(target)) &#123;</span><br><span class="line">    target = &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="类型不一致"><a href="#类型不一致" class="headerlink" title="类型不一致"></a>类型不一致</h2><p>其实我们实现的方法有个小 bug ，不信我们写个 demo:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">b</span>: &#123;</span><br><span class="line">        <span class="attr">c</span>: <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;</span><br><span class="line">    <span class="attr">b</span>: &#123;</span><br><span class="line">        <span class="attr">c</span>: [<span class="number">5</span>],</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> d = <span class="title function_">extend</span>(<span class="literal">true</span>, obj1, obj2)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(d);</span><br></pre></td></tr></table></figure>
+
+<p>我们预期会返回这样一个对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">b</span>: &#123;</span><br><span class="line">        <span class="attr">c</span>: [<span class="number">5</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然而返回了这样一个对象:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">b</span>: &#123;</span><br><span class="line">        <span class="attr">c</span>: &#123;</span><br><span class="line">            <span class="number">0</span>: <span class="number">5</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>让我们细细分析为什么会导致这种情况：</p>
+<p>首先我们在函数的开始写一个 console 函数比如：console.log(1)，然后以上面这个 demo 为例，执行一下，我们会发现 1 打印了三次，这就是说 extend 函数执行了三遍，让我们捋一捋这三遍传入的参数：</p>
+<p>第一遍执行到递归调用时：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> src = &#123; <span class="attr">c</span>: <span class="number">2</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> copy = &#123; <span class="attr">c</span>: [<span class="number">5</span>]&#125;;</span><br><span class="line"></span><br><span class="line">target[name] = <span class="title function_">extend</span>(<span class="literal">true</span>, src, copy);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>第二遍执行到递归调用时：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">var</span> copy = [<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line">target[name] = <span class="title function_">extend</span>(<span class="literal">true</span>, src, copy);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>第三遍进行最终的赋值，因为 src 是一个基本类型，我们默认使用一个空对象作为目标值，所以最终的结果就变成了对象的属性！</p>
+<p>为了解决这个问题，我们需要对目标属性值和待复制对象的属性值进行判断：</p>
+<p>判断目标属性值跟要复制的对象的属性值类型是否一致:</p>
+<ul>
+<li><p>如果待复制对象属性值类型为数组，目标属性值类型不为数组的话，目标属性值就设为 []</p>
+</li>
+<li><p>如果待复制对象属性值类型为对象，目标属性值类型不为对象的话，目标属性值就设为 {}</p>
+</li>
+</ul>
+<p>结合着<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/30">《JavaScript专题之类型判断(下)》</a>中的 isPlainObject 函数，我们可以对类型进行更细致的划分：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> clone, copyIsArray;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (deep &amp;&amp; copy &amp;&amp; (<span class="title function_">isPlainObject</span>(copy) ||</span><br><span class="line">        (copyIsArray = <span class="title class_">Array</span>.<span class="title function_">isArray</span>(copy)))) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (copyIsArray) &#123;</span><br><span class="line">        copyIsArray = <span class="literal">false</span>;</span><br><span class="line">        clone = src &amp;&amp; <span class="title class_">Array</span>.<span class="title function_">isArray</span>(src) ? src : [];</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        clone = src &amp;&amp; <span class="title function_">isPlainObject</span>(src) ? src : &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    target[name] = <span class="title function_">extend</span>(deep, clone, copy);</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (copy !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    target[name] = copy;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="循环引用"><a href="#循环引用" class="headerlink" title="循环引用"></a>循环引用</h2><p>实际上，我们还可能遇到一个循环引用的问题，举个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;name : b&#125;;</span><br><span class="line"><span class="keyword">var</span> b = &#123;name : a&#125;</span><br><span class="line"><span class="keyword">var</span> c = <span class="title function_">extend</span>(a, b);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(c);</span><br></pre></td></tr></table></figure>
+
+<p>我们会得到一个可以无限展开的对象，类似于这样：</p>
+<p><img src="https://github.com/mqyqingfeng/Blog/raw/master/Images/extend/extend1.png" alt="循环引用对象"></p>
+<p>为了避免这个问题，我们需要判断要复制的对象属性是否等于 target，如果等于，我们就跳过：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">src = target[name];</span><br><span class="line">copy = options[name];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (target === copy) &#123;</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>如果加上这句，结果就会是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">name</span>: <span class="literal">undefined</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="最终代码"><a href="#最终代码" class="headerlink" title="最终代码"></a>最终代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">extend</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 默认不进行深拷贝</span></span><br><span class="line">    <span class="keyword">var</span> deep = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">var</span> name, options, src, copy, clone, copyIsArray;</span><br><span class="line">    <span class="keyword">var</span> length = <span class="variable language_">arguments</span>.<span class="property">length</span>;</span><br><span class="line">    <span class="comment">// 记录要复制的对象的下标</span></span><br><span class="line">    <span class="keyword">var</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 第一个参数不传布尔值的情况下，target 默认是第一个参数</span></span><br><span class="line">    <span class="keyword">var</span> target = <span class="variable language_">arguments</span>[<span class="number">0</span>] || &#123;&#125;;</span><br><span class="line">    <span class="comment">// 如果第一个参数是布尔值，第二个参数是 target</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> target == <span class="string">&#x27;boolean&#x27;</span>) &#123;</span><br><span class="line">        deep = target;</span><br><span class="line">        target = <span class="variable language_">arguments</span>[i] || &#123;&#125;;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 如果target不是对象，我们是无法进行复制的，所以设为 &#123;&#125;</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> target !== <span class="string">&quot;object&quot;</span> &amp;&amp; !<span class="title function_">isFunction</span>(target)) &#123;</span><br><span class="line">        target = &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 循环遍历要复制的对象们</span></span><br><span class="line">    <span class="keyword">for</span> (; i &lt; length; i++) &#123;</span><br><span class="line">        <span class="comment">// 获取当前对象</span></span><br><span class="line">        options = <span class="variable language_">arguments</span>[i];</span><br><span class="line">        <span class="comment">// 要求不能为空 避免 extend(a,,b) 这种情况</span></span><br><span class="line">        <span class="keyword">if</span> (options != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (name <span class="keyword">in</span> options) &#123;</span><br><span class="line">                <span class="comment">// 目标属性值</span></span><br><span class="line">                src = target[name];</span><br><span class="line">                <span class="comment">// 要复制的对象的属性值</span></span><br><span class="line">                copy = options[name];</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 解决循环引用</span></span><br><span class="line">                <span class="keyword">if</span> (target === copy) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 要递归的对象必须是 plainObject 或者数组</span></span><br><span class="line">                <span class="keyword">if</span> (deep &amp;&amp; copy &amp;&amp; (<span class="title function_">isPlainObject</span>(copy) ||</span><br><span class="line">                        (copyIsArray = <span class="title class_">Array</span>.<span class="title function_">isArray</span>(copy)))) &#123;</span><br><span class="line">                    <span class="comment">// 要复制的对象属性值类型需要与目标属性值相同</span></span><br><span class="line">                    <span class="keyword">if</span> (copyIsArray) &#123;</span><br><span class="line">                        copyIsArray = <span class="literal">false</span>;</span><br><span class="line">                        clone = src &amp;&amp; <span class="title class_">Array</span>.<span class="title function_">isArray</span>(src) ? src : [];</span><br><span class="line"></span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        clone = src &amp;&amp; <span class="title function_">isPlainObject</span>(src) ? src : &#123;&#125;;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    target[name] = <span class="title function_">extend</span>(deep, clone, copy);</span><br><span class="line"></span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (copy !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">                    target[name] = copy;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> target;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><p>如果觉得看明白了上面的代码，想想下面两个 demo 的结果：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="title function_">extend</span>(<span class="literal">true</span>, [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a) <span class="comment">// ???</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line">    <span class="attr">value</span>: &#123;</span><br><span class="line">        <span class="number">3</span>: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;</span><br><span class="line">    <span class="attr">value</span>: [<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>],</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = <span class="title function_">extend</span>(<span class="literal">true</span>, obj1, obj2) <span class="comment">// ???</span></span><br><span class="line"><span class="keyword">var</span> c = <span class="title function_">extend</span>(<span class="literal">true</span>, obj2, obj1) <span class="comment">// ???</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="专题系列"><a href="#专题系列" class="headerlink" title="专题系列"></a>专题系列</h2><p>JavaScript专题系列目录地址：<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog">https://github.com/mqyqingfeng/Blog</a>。</p>
+<p>JavaScript专题系列预计写二十篇左右，主要研究日常开发中一些功能点的实现，比如防抖、节流、去重、类型判断、拷贝、最值、扁平、柯里、递归、乱序、排序等，特点是研(chao)究(xi) underscore 和 jQuery 的实现方式。</p>
+<p>如果有错误或者不严谨的地方，请务必给予指正，十分感谢。如果喜欢或者有所启发，欢迎 star，对作者也是一种鼓励。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/11/JavaScript%E4%B8%93%E9%A2%98%E4%B9%8B%E4%BB%8E%E9%9B%B6%E5%AE%9E%E7%8E%B0jQuery%E7%9A%84extend/" data-id="cm2n1iutg002i9sr36ws0cs7f" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/10/11/JavaScript%E4%B8%93%E9%A2%98%E4%B9%8B%E9%80%92%E5%BD%92/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/10/11/10.%E6%A8%A1%E5%9D%97%E5%8C%96/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8AES6-%E6%95%99%E7%A8%8B%E3%80%8B%E7%AC%94%E8%AE%B0/">《ES6 教程》笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8AJavaScript%E6%95%99%E7%A8%8B%E3%80%8B%E7%AC%94%E8%AE%B0/">《JavaScript教程》笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/10/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bnew%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bcall%E5%92%8Capply%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bbind%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8B%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

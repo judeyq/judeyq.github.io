@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一、API添加和删除元素 **push()**：在数组末尾添加一个或多个元素，并返回新数组的长度。  **pop()**：移除并返回数组的最后一个元素。  **unshift()**：在数组开头添加一个或多个元素，并返回新数组的长度。  **shift()**：移除并返回数组的第一个元素。  **splice()**：从指定位置添加或删除元素。 实现添加和删除元素的方法 1234567891011">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2024/10/11/08.%E6%95%B0%E7%BB%84/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、API添加和删除元素 **push()**：在数组末尾添加一个或多个元素，并返回新数组的长度。  **pop()**：移除并返回数组的最后一个元素。  **unshift()**：在数组开头添加一个或多个元素，并返回新数组的长度。  **shift()**：移除并返回数组的第一个元素。  **splice()**：从指定位置添加或删除元素。 实现添加和删除元素的方法 1234567891011">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-10-11T00:29:26.240Z">
+<meta property="article:modified_time" content="2024-10-11T00:29:26.799Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-08.数组" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/11/08.%E6%95%B0%E7%BB%84/" class="article-date">
+  <time class="dt-published" datetime="2024-10-11T00:29:26.240Z" itemprop="datePublished">2024-10-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、API"><a href="#一、API" class="headerlink" title="一、API"></a>一、API</h2><h3 id="添加和删除元素"><a href="#添加和删除元素" class="headerlink" title="添加和删除元素"></a>添加和删除元素</h3><ul>
+<li><p>**push()**：在数组末尾添加一个或多个元素，并返回新数组的长度。</p>
+</li>
+<li><p>**pop()**：移除并返回数组的最后一个元素。</p>
+</li>
+<li><p>**unshift()**：在数组开头添加一个或多个元素，并返回新数组的长度。</p>
+</li>
+<li><p>**shift()**：移除并返回数组的第一个元素。</p>
+</li>
+<li><p>**splice()**：从指定位置添加或删除元素。</p>
+<p>实现添加和删除元素的方法</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">// 模拟实现 push() 方法</span><br><span class="line">Array.prototype.myPush = function(...elements) &#123;</span><br><span class="line">  const len = this.length;</span><br><span class="line">  let i = 0;</span><br><span class="line">  while (i &lt; elements.length) &#123;</span><br><span class="line">    this[len + i] = elements[i];</span><br><span class="line">    i++;</span><br><span class="line">  &#125;</span><br><span class="line">  return this.length;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 模拟实现 pop() 方法</span><br><span class="line">Array.prototype.myPop = function() &#123;</span><br><span class="line">  if (this</span><br><span class="line"></span><br><span class="line">.length === 0) return undefined;</span><br><span class="line">  const lastElement = this[this.length - 1];</span><br><span class="line">  delete this[this.length - 1];</span><br><span class="line">  this.length--;</span><br><span class="line">  return lastElement;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 模拟实现 unshift() 方法</span><br><span class="line">Array.prototype.myUnshift = function(...elements) &#123;</span><br><span class="line">  const originalLength = this.length;</span><br><span class="line">  for (let i = originalLength - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">    this[i + elements.length] = this[i];</span><br><span class="line">  &#125;</span><br><span class="line">  for (let i = 0; i &lt; elements.length; i++) &#123;</span><br><span class="line">    this[i] = elements[i];</span><br><span class="line">  &#125;</span><br><span class="line">  this.length = originalLength + elements.length;</span><br><span class="line">  return this.length;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 模拟实现 shift() 方法</span><br><span class="line">Array.prototype.myShift = function() &#123;</span><br><span class="line">  if (this.length === 0) return undefined;</span><br><span class="line">  const firstElement = this[0];</span><br><span class="line">  for (let i = 0; i &lt; this.length - 1; i++) &#123;</span><br><span class="line">    this[i] = this[i + 1];</span><br><span class="line">  &#125;</span><br><span class="line">  delete this[this.length - 1];</span><br><span class="line">  this.length--;</span><br><span class="line">  return firstElement;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 示例使用</span><br><span class="line">const myArray = [1, 2, 3];</span><br><span class="line">console.log(myArray.myPush(4, 5));    // 输出：5</span><br><span class="line">console.log(myArray);                  // 输出：[1, 2, 3, 4, 5]</span><br><span class="line">console.log(myArray.myPop());        // 输出：5</span><br><span class="line">console.log(myArray);                  // 输出：[1, 2, 3, 4]</span><br><span class="line">console.log(myArray.myUnshift(0)); // 输出：5</span><br><span class="line">console.log(myArray);                  // 输出：[0, 1, 2, 3, 4]</span><br><span class="line">console.log(myArray.myShift());     // 输出：0</span><br><span class="line">console.log(myArray);                  // 输出：[1, 2, 3, 4]</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="修改和访问元素"><a href="#修改和访问元素" class="headerlink" title="修改和访问元素"></a>修改和访问元素</h3><ul>
+<li><p>**slice()**：返回数组的一部分，不改变原数组。</p>
+</li>
+<li><p>**concat()**：将多个数组合并为一个新数组。</p>
+</li>
+<li><p>**join()**：将数组的元素连接成一个字符串。</p>
+</li>
+<li><p>**reverse()**：颠倒数组中元素的顺序。</p>
+</li>
+<li><p>**sort()**：对数组元素进行排序。</p>
+<p>实现修改和访问元素的方法：</p>
+</li>
+<li><pre><code class="shell">// 模拟实现 splice() 方法
+Array.prototype.mySplice = function(startIndex, deleteCount, ...elements) &#123;
+  const removedElements = [];
+  const len = this.length;
+  const deleteEndIndex = Math.min(startIndex + deleteCount, len);
+  const moveCount = len - deleteEndIndex;
+
+  // 保存删除的元素
+  for (let i = startIndex; i &lt; deleteEndIndex; i++) &#123;
+    removedElements.push(this[i]);
+  &#125;
+
+  // 移动剩余元素
+  for (let i = 0; i &lt; moveCount; i++) &#123;
+    this[startIndex + deleteCount + i] = this[startIndex + deleteCount + i + moveCount];
+  &#125;
+
+  // 插入新元素
+  for (let i = 0; i &lt; elements.length; i++) &#123;
+    this[startIndex + i] = elements[i];
+  &#125;
+
+  // 更新长度
+  this.length = len - deleteCount + elements.length;
+
+  return removedElements;
+&#125;;
+
+// 示例使用
+const myArray = [1, 2, 3, 4, 5];
+console.log(myArray.mySplice(2, 2, &#39;a&#39;, &#39;b&#39;)); // 输出：[3, 4]
+console.log(myArray);                             // 输出：[1, 2, &#39;a&#39;, &#39;b&#39;, 5]
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- </span><br><span class="line"></span><br><span class="line">### 数组遍历</span><br><span class="line"></span><br><span class="line">- **forEach()**：对数组的每个元素执行指定的操作。</span><br><span class="line"></span><br><span class="line">- **map()**：创建一个新数组，其中的元素是原始数组经过指定操作后的结果。</span><br><span class="line"></span><br><span class="line">- **filter()**：创建一个新数组，其中的元素是符合指定条件的原始数组元素。</span><br><span class="line"></span><br><span class="line">- **reduce()**：对数组的元素进行累加或合并操作。</span><br><span class="line"></span><br><span class="line">  ```shell</span><br><span class="line">  // 模拟实现 forEach() 方法</span><br><span class="line">  Array.prototype.myForEach = function(callbackFn) &#123;</span><br><span class="line">    for (let i = 0;</span><br><span class="line">  </span><br><span class="line">   i &lt; this.length; i++) &#123;</span><br><span class="line">      callbackFn(this[i], i, this);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  </span><br><span class="line">  // 模拟实现 map() 方法</span><br><span class="line">  Array.prototype.myMap = function(callbackFn) &#123;</span><br><span class="line">    const mappedArray = [];</span><br><span class="line">    for (let i = 0; i &lt; this.length; i++) &#123;</span><br><span class="line">      mappedArray.push(callbackFn(this[i], i, this));</span><br><span class="line">    &#125;</span><br><span class="line">    return mappedArray;</span><br><span class="line">  &#125;;</span><br><span class="line">  </span><br><span class="line">  // 示例使用</span><br><span class="line">  const myArray = [1, 2, 3];</span><br><span class="line">  myArray.myForEach((value, index) =&gt; &#123;</span><br><span class="line">    console.log(`Element at index $&#123;index&#125; is $&#123;value&#125;`);</span><br><span class="line">  &#125;);</span><br><span class="line">  </span><br><span class="line">  const doubledArray = myArray.myMap(value =&gt; value * 2);</span><br><span class="line">  console.log(doubledArray);  // 输出：[2, 4, 6]</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<h3 id="数组转换和连接"><a href="#数组转换和连接" class="headerlink" title="数组转换和连接"></a>数组转换和连接</h3><ul>
+<li><p>**toString()**：将数组转换为字符串。</p>
+</li>
+<li><p>**toLocaleString()**：将数组转换为本地化的字符串。</p>
+</li>
+<li><p>**join()**：将数组的元素连接成一个字符串。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模拟实现 toString() 方法</span></span><br><span class="line"><span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">myToString</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> result = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      result += <span class="string">&#x27;, &#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    result += <span class="variable language_">this</span>[i];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模拟实现 join() 方法</span></span><br><span class="line"><span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">myJoin</span> = <span class="keyword">function</span>(<span class="params">separator = <span class="string">&#x27;,&#x27;</span></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> result = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      result += separator;</span><br><span class="line">    &#125;</span><br><span class="line">    result += <span class="variable language_">this</span>[i];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 示例使用</span></span><br><span class="line"><span class="keyword">const</span> myArray = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(myArray.<span class="title function_">myToString</span>());      <span class="comment">// 输出：&#x27;1, 2, 3&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(myArray.<span class="title function_">myJoin</span>(<span class="string">&#x27;-&#x27;</span>));       <span class="comment">// 输出：&#x27;1-2-3&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="数组排序和搜索"><a href="#数组排序和搜索" class="headerlink" title="数组排序和搜索"></a>数组排序和搜索</h3><ul>
+<li><p>**sort()**：对数组元素进行排序。</p>
+</li>
+<li><p>**reverse()**：颠倒数组中元素的顺序。</p>
+</li>
+<li><p>**indexOf()**：返回指定元素在数组中首次出现的索引。</p>
+</li>
+<li><p>**lastIndexOf()**：返回指定元素在数组中最后一次出现的索引。</p>
+</li>
+<li><pre><code class="js">// 模拟实现 sort() 方法
+Array.prototype.mySort = function(compareFn) &#123;
+  const length = this.length;
+  for (let i = 0; i &lt; length - 1; i++) &#123;
+    for (let j = 0; j &lt; length - 1 - i; j++) &#123;
+      if (compareFn(this[j], this[j + 1]) &gt; 0) &#123;
+        [this[j], this[j + 1]] = [this[j + 1], this[j]];
+      &#125;
+    &#125;
+  &#125;
+  return this;
+&#125;;
+
+// 模拟实现 indexOf() 方法
+Array.prototype.myIndexOf = function(searchElement, fromIndex = 0) &#123;
+  const length = this.length;
+  for (let i = Math.max(fromIndex, 0); i &lt; length; i++) &#123;
+    if (this[i] === searchElement) &#123;
+      return i;
+    &#125;
+  &#125;
+  return -1;
+&#125;;
+
+// 示例使用
+const myArray = [5, 2, 1, 4, 3];
+console.log(myArray.mySort());        // 输出：[1, 2, 3, 4, 5]
+console.log(myArray.myIndexOf(4));  // 输出：3
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- </span><br><span class="line"></span><br><span class="line">### 其他</span><br><span class="line"></span><br><span class="line">- **isArray()**：检测一个值是否为数组。</span><br><span class="line"></span><br><span class="line">- **find()**：返回数组中符合指定条件的第一个元素。</span><br><span class="line"></span><br><span class="line">- **findIndex()**：返回数组中符合指定条件的第一个元素的索引。</span><br><span class="line"></span><br><span class="line">- **some()**：检测数组中是否至少有一个元素符合指定条件。</span><br><span class="line"></span><br><span class="line">- **every()**：检测数组中是否所有元素都符合指定条件。</span><br><span class="line"></span><br><span class="line">- ```js</span><br><span class="line">  // 模拟实现 isArray() 方法</span><br><span class="line">  Array.myIsArray = function(obj) &#123;</span><br><span class="line">    return Object.prototype.toString.call(obj) === &#x27;[object Array]&#x27;;</span><br><span class="line">  &#125;;</span><br><span class="line">  </span><br><span class="line">  // 模拟实现 find() 方法</span><br><span class="line">  Array.prototype.myFind = function(callbackFn) &#123;</span><br><span class="line">    for (let i = 0; i &lt; this.length; i++) &#123;</span><br><span class="line">      if (callbackFn(this[i], i, this)) &#123;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">        return this[i];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return undefined;</span><br><span class="line">  &#125;;</span><br><span class="line">  </span><br><span class="line">  // 示例使用</span><br><span class="line">  const myArray = [1, 2, 3, 4, 5];</span><br><span class="line">  console.log(Array.myIsArray(myArray));    // 输出：true</span><br><span class="line">  console.log(myArray.myFind(value =&gt; value &gt; 3)); // 输出：4</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/11/08.%E6%95%B0%E7%BB%84/" data-id="cm2n1iusy000o9sr368ur9mx8" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/10/11/09.map%E5%92%8CforEach%E7%9A%84%E5%8C%BA%E5%88%AB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/pages/7188882b8d65af1b" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">最新提案</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8AES6-%E6%95%99%E7%A8%8B%E3%80%8B%E7%AC%94%E8%AE%B0/">《ES6 教程》笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8AJavaScript%E6%95%99%E7%A8%8B%E3%80%8B%E7%AC%94%E8%AE%B0/">《JavaScript教程》笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/10/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bnew%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bcall%E5%92%8Capply%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bbind%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8B%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

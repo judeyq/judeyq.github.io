@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>正则的扩展 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="正则的扩展RegExp 构造函数在 ES5 中，RegExp构造函数的参数有两种情况。 第一种情况是，参数是字符串，这时第二个参数表示正则表达式的修饰符（flag）。 123var regex &#x3D; new RegExp(&#x27;xyz&#x27;, &#x27;i&#x27;);&#x2F;&#x2F; 等价于var regex &#x3D; &#x2F;xyz&#x2F;i;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则的扩展">
+<meta property="og:url" content="http://example.com/pages/0473261a6ab0ee8c">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="正则的扩展RegExp 构造函数在 ES5 中，RegExp构造函数的参数有两种情况。 第一种情况是，参数是字符串，这时第二个参数表示正则表达式的修饰符（flag）。 123var regex &#x3D; new RegExp(&#x27;xyz&#x27;, &#x27;i&#x27;);&#x2F;&#x2F; 等价于var regex &#x3D; &#x2F;xyz&#x2F;i;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-09T08:00:29.000Z">
+<meta property="article:modified_time" content="2024-10-11T00:29:17.982Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-06.正则的扩展" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/pages/0473261a6ab0ee8c" class="article-date">
+  <time class="dt-published" datetime="2020-02-09T08:00:29.000Z" itemprop="datePublished">2020-02-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E3%80%8AES6-%E6%95%99%E7%A8%8B%E3%80%8B%E7%AC%94%E8%AE%B0/">《ES6 教程》笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      正则的扩展
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="正则的扩展"><a href="#正则的扩展" class="headerlink" title="正则的扩展"></a>正则的扩展</h1><h2 id="RegExp-构造函数"><a href="#RegExp-构造函数" class="headerlink" title="RegExp 构造函数"></a>RegExp 构造函数</h2><p>在 ES5 中，<code>RegExp</code>构造函数的参数有两种情况。</p>
+<p>第一种情况是，参数是字符串，这时第二个参数表示正则表达式的修饰符（flag）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> regex = <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">&#x27;xyz&#x27;</span>, <span class="string">&#x27;i&#x27;</span>);</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">var</span> regex = <span class="regexp">/xyz/i</span>;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>第二种情况是，参数是一个正则表示式，这时会返回一个原有正则表达式的拷贝。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> regex = <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="regexp">/xyz/i</span>);</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">var</span> regex = <span class="regexp">/xyz/i</span>;</span><br></pre></td></tr></table></figure>
+
+<p>但是，ES5 不允许此时使用第二个参数添加修饰符，否则会报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> regex = <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="regexp">/xyz/</span>, <span class="string">&#x27;i&#x27;</span>);</span><br><span class="line"><span class="comment">// Uncaught TypeError: Cannot supply flags when constructing one RegExp from another</span></span><br></pre></td></tr></table></figure>
+
+<p>ES6 改变了这种行为。如果<code>RegExp</code>构造函数第一个参数是一个正则对象，那么可以使用第二个参数指定修饰符。而且，返回的正则表达式会忽略原有的正则表达式的修饰符，只使用新指定的修饰符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="regexp">/abc/ig</span>, <span class="string">&#x27;i&#x27;</span>).<span class="property">flags</span></span><br><span class="line"><span class="comment">// &quot;i&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，原有正则对象的修饰符是<code>ig</code>，它会被第二个参数<code>i</code>覆盖。</p>
+<h2 id="字符串的正则方法"><a href="#字符串的正则方法" class="headerlink" title="字符串的正则方法"></a>字符串的正则方法</h2><p>字符串对象共有 4 个方法，可以使用正则表达式：<code>match()</code>、<code>replace()</code>、<code>search()</code>和<code>split()</code>。</p>
+<p>ES6 将这 4 个方法，在语言内部全部调用<code>RegExp</code>的实例方法，从而做到所有与正则相关的方法，全都定义在<code>RegExp</code>对象上。</p>
+<ul>
+<li><code>String.prototype.match</code> 调用 <code>RegExp.prototype[Symbol.match]</code></li>
+<li><code>String.prototype.replace</code> 调用 <code>RegExp.prototype[Symbol.replace]</code></li>
+<li><code>String.prototype.search</code> 调用 <code>RegExp.prototype[Symbol.search]</code></li>
+<li><code>String.prototype.split</code> 调用 <code>RegExp.prototype[Symbol.split]</code></li>
+</ul>
+<h2 id="u-修饰符"><a href="#u-修饰符" class="headerlink" title="u 修饰符"></a>u 修饰符</h2><p>ES6 对正则表达式添加了<code>u</code>修饰符，含义为“Unicode 模式”，用来正确处理大于<code>\uFFFF</code>的 Unicode 字符。也就是说，会正确处理四个字节的 UTF-16 编码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/^\uD83D/u.<span class="title function_">test</span>(<span class="string">&#x27;\uD83D\uDC2A&#x27;</span>) <span class="comment">// false</span></span><br><span class="line">/^\uD83D/.<span class="title function_">test</span>(<span class="string">&#x27;\uD83D\uDC2A&#x27;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>\uD83D\uDC2A</code>是一个四个字节的 UTF-16 编码，代表一个字符。但是，ES5 不支持四个字节的 UTF-16 编码，会将其识别为两个字符，导致第二行代码结果为<code>true</code>。加了<code>u</code>修饰符以后，ES6 就会识别其为一个字符，所以第一行代码结果为<code>false</code>。</p>
+<p>一旦加上<code>u</code>修饰符号，就会修改下面这些正则表达式的行为。</p>
+<p><strong>（1）点字符</strong></p>
+<p>点（<code>.</code>）字符在正则表达式中，含义是除了换行符以外的任意单个字符。对于码点大于<code>0xFFFF</code>的 Unicode 字符，点字符不能识别，必须加上<code>u</code>修饰符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">&#x27;𠮷&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="regexp">/^.$/</span>.<span class="title function_">test</span>(s) <span class="comment">// false</span></span><br><span class="line">/^.<span class="property">$</span>/u.<span class="title function_">test</span>(s) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码表示，如果不添加<code>u</code>修饰符，正则表达式就会认为字符串为两个字符，从而匹配失败。</p>
+<p><strong>（2）Unicode 字符表示法</strong></p>
+<p>ES6 新增了使用大括号表示 Unicode 字符，这种表示法在正则表达式中必须加上<code>u</code>修饰符，才能识别当中的大括号，否则会被解读为量词。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/\u&#123;<span class="number">61</span>&#125;/.<span class="title function_">test</span>(<span class="string">&#x27;a&#x27;</span>) <span class="comment">// false</span></span><br><span class="line">/\u&#123;<span class="number">61</span>&#125;/u.<span class="title function_">test</span>(<span class="string">&#x27;a&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">/\u&#123;20BB7&#125;/u.<span class="title function_">test</span>(<span class="string">&#x27;𠮷&#x27;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码表示，如果不加<code>u</code>修饰符，正则表达式无法识别<code>\u&#123;61&#125;</code>这种表示法，只会认为这匹配 61 个连续的<code>u</code>。</p>
+<p><strong>（3）量词</strong></p>
+<p>使用<code>u</code>修饰符后，所有量词都会正确识别码点大于<code>0xFFFF</code>的 Unicode 字符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/a&#123;<span class="number">2</span>&#125;/.<span class="title function_">test</span>(<span class="string">&#x27;aa&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">/a&#123;<span class="number">2</span>&#125;/u.<span class="title function_">test</span>(<span class="string">&#x27;aa&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">/𠮷&#123;<span class="number">2</span>&#125;/.<span class="title function_">test</span>(<span class="string">&#x27;𠮷𠮷&#x27;</span>) <span class="comment">// false</span></span><br><span class="line">/𠮷&#123;<span class="number">2</span>&#125;/u.<span class="title function_">test</span>(<span class="string">&#x27;𠮷𠮷&#x27;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>（4）预定义模式</strong></p>
+<p><code>u</code>修饰符也影响到预定义模式，能否正确识别码点大于<code>0xFFFF</code>的 Unicode 字符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/^\S$/.<span class="title function_">test</span>(<span class="string">&#x27;𠮷&#x27;</span>) <span class="comment">// false</span></span><br><span class="line">/^\S$/u.<span class="title function_">test</span>(<span class="string">&#x27;𠮷&#x27;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码的<code>\S</code>是预定义模式，匹配所有非空白字符。只有加了<code>u</code>修饰符，它才能正确匹配码点大于<code>0xFFFF</code>的 Unicode 字符。</p>
+<p>利用这一点，可以写出一个正确返回字符串长度的函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">codePointLength</span>(<span class="params">text</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> result = text.<span class="title function_">match</span>(<span class="regexp">/[\s\S]/gu</span>);</span><br><span class="line">  <span class="keyword">return</span> result ? result.<span class="property">length</span> : <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s = <span class="string">&#x27;𠮷𠮷&#x27;</span>;</span><br><span class="line"></span><br><span class="line">s.<span class="property">length</span> <span class="comment">// 4</span></span><br><span class="line"><span class="title function_">codePointLength</span>(s) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>（5）i 修饰符</strong></p>
+<p>有些 Unicode 字符的编码不同，但是字型很相近，比如，<code>\u004B</code>与<code>\u212A</code>都是大写的<code>K</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/[a-z]/i.<span class="title function_">test</span>(<span class="string">&#x27;\u212A&#x27;</span>) <span class="comment">// false</span></span><br><span class="line">/[a-z]/iu.<span class="title function_">test</span>(<span class="string">&#x27;\u212A&#x27;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，不加<code>u</code>修饰符，就无法识别非规范的<code>K</code>字符。</p>
+<p><strong>（6）转义</strong></p>
+<p>没有<code>u</code>修饰符的情况下，正则中没有定义的转义（如逗号的转义<code>\,</code>）无效，而在<code>u</code>模式会报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/\,<span class="regexp">/ /</span><span class="regexp">/ /</span>\,/</span><br><span class="line"><span class="regexp">/\,/u</span> <span class="comment">// 报错</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，没有<code>u</code>修饰符时，逗号前面的反斜杠是无效的，加了<code>u</code>修饰符就报错。</p>
+<h2 id="RegExp-prototype-unicode-属性"><a href="#RegExp-prototype-unicode-属性" class="headerlink" title="RegExp.prototype.unicode 属性"></a>RegExp.prototype.unicode 属性</h2><p>正则实例对象新增<code>unicode</code>属性，表示是否设置了<code>u</code>修饰符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> r1 = <span class="regexp">/hello/</span>;</span><br><span class="line"><span class="keyword">const</span> r2 = <span class="regexp">/hello/u</span>;</span><br><span class="line"></span><br><span class="line">r1.<span class="property">unicode</span> <span class="comment">// false</span></span><br><span class="line">r2.<span class="property">unicode</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，正则表达式是否设置了<code>u</code>修饰符，可以从<code>unicode</code>属性看出来。</p>
+<h2 id="y-修饰符"><a href="#y-修饰符" class="headerlink" title="y 修饰符"></a>y 修饰符</h2><p>除了<code>u</code>修饰符，ES6 还为正则表达式添加了<code>y</code>修饰符，叫做“粘连”（sticky）修饰符。</p>
+<p><code>y</code>修饰符的作用与<code>g</code>修饰符类似，也是全局匹配，后一次匹配都从上一次匹配成功的下一个位置开始。不同之处在于，<code>g</code>修饰符只要剩余位置中存在匹配就可，而<code>y</code>修饰符确保匹配必须从剩余的第一个位置开始，这也就是“粘连”的涵义。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">&#x27;aaa_aa_a&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> r1 = <span class="regexp">/a+/g</span>;</span><br><span class="line"><span class="keyword">var</span> r2 = <span class="regexp">/a+/y</span>;</span><br><span class="line"></span><br><span class="line">r1.<span class="title function_">exec</span>(s) <span class="comment">// [&quot;aaa&quot;]</span></span><br><span class="line">r2.<span class="title function_">exec</span>(s) <span class="comment">// [&quot;aaa&quot;]</span></span><br><span class="line"></span><br><span class="line">r1.<span class="title function_">exec</span>(s) <span class="comment">// [&quot;aa&quot;]</span></span><br><span class="line">r2.<span class="title function_">exec</span>(s) <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码有两个正则表达式，一个使用<code>g</code>修饰符，另一个使用<code>y</code>修饰符。这两个正则表达式各执行了两次，第一次执行的时候，两者行为相同，剩余字符串都是<code>_aa_a</code>。由于<code>g</code>修饰没有位置要求，所以第二次执行会返回结果，而<code>y</code>修饰符要求匹配必须从头部开始，所以返回<code>null</code>。</p>
+<p>如果改一下正则表达式，保证每次都能头部匹配，<code>y</code>修饰符就会返回结果了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">&#x27;aaa_aa_a&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> r = <span class="regexp">/a+_/y</span>;</span><br><span class="line"></span><br><span class="line">r.<span class="title function_">exec</span>(s) <span class="comment">// [&quot;aaa_&quot;]</span></span><br><span class="line">r.<span class="title function_">exec</span>(s) <span class="comment">// [&quot;aa_&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码每次匹配，都是从剩余字符串的头部开始。</p>
+<p>使用<code>lastIndex</code>属性，可以更好地说明<code>y</code>修饰符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">REGEX</span> = <span class="regexp">/a/g</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指定从2号位置（y）开始匹配</span></span><br><span class="line"><span class="variable constant_">REGEX</span>.<span class="property">lastIndex</span> = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 匹配成功</span></span><br><span class="line"><span class="keyword">const</span> match = <span class="variable constant_">REGEX</span>.<span class="title function_">exec</span>(<span class="string">&#x27;xaya&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在3号位置匹配成功</span></span><br><span class="line">match.<span class="property">index</span> <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 下一次匹配从4号位开始</span></span><br><span class="line"><span class="variable constant_">REGEX</span>.<span class="property">lastIndex</span> <span class="comment">// 4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 4号位开始匹配失败</span></span><br><span class="line"><span class="variable constant_">REGEX</span>.<span class="title function_">exec</span>(<span class="string">&#x27;xaya&#x27;</span>) <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>lastIndex</code>属性指定每次搜索的开始位置，<code>g</code>修饰符从这个位置开始向后搜索，直到发现匹配为止。</p>
+<p><code>y</code>修饰符同样遵守<code>lastIndex</code>属性，但是要求必须在<code>lastIndex</code>指定的位置发现匹配。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">REGEX</span> = <span class="regexp">/a/y</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指定从2号位置开始匹配</span></span><br><span class="line"><span class="variable constant_">REGEX</span>.<span class="property">lastIndex</span> = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不是粘连，匹配失败</span></span><br><span class="line"><span class="variable constant_">REGEX</span>.<span class="title function_">exec</span>(<span class="string">&#x27;xaya&#x27;</span>) <span class="comment">// null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 指定从3号位置开始匹配</span></span><br><span class="line"><span class="variable constant_">REGEX</span>.<span class="property">lastIndex</span> = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3号位置是粘连，匹配成功</span></span><br><span class="line"><span class="keyword">const</span> match = <span class="variable constant_">REGEX</span>.<span class="title function_">exec</span>(<span class="string">&#x27;xaya&#x27;</span>);</span><br><span class="line">match.<span class="property">index</span> <span class="comment">// 3</span></span><br><span class="line"><span class="variable constant_">REGEX</span>.<span class="property">lastIndex</span> <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+
+<p>实际上，<code>y</code>修饰符号隐含了头部匹配的标志<code>^</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/b/y.<span class="title function_">exec</span>(<span class="string">&#x27;aba&#x27;</span>)</span><br><span class="line"><span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码由于不能保证头部匹配，所以返回<code>null</code>。<code>y</code>修饰符的设计本意，就是让头部匹配的标志<code>^</code>在全局匹配中都有效。</p>
+<p>下面是字符串对象的<code>replace</code>方法的例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">REGEX</span> = <span class="regexp">/a/gy</span>;</span><br><span class="line"><span class="string">&#x27;aaxa&#x27;</span>.<span class="title function_">replace</span>(<span class="variable constant_">REGEX</span>, <span class="string">&#x27;-&#x27;</span>) <span class="comment">// &#x27;--xa&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，最后一个<code>a</code>因为不是出现在下一次匹配的头部，所以不会被替换。</p>
+<p>单单一个<code>y</code>修饰符对<code>match</code>方法，只能返回第一个匹配，必须与<code>g</code>修饰符联用，才能返回所有匹配。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;a1a2a3&#x27;</span>.<span class="title function_">match</span>(<span class="regexp">/a\d/y</span>) <span class="comment">// [&quot;a1&quot;]</span></span><br><span class="line"><span class="string">&#x27;a1a2a3&#x27;</span>.<span class="title function_">match</span>(<span class="regexp">/a\d/gy</span>) <span class="comment">// [&quot;a1&quot;, &quot;a2&quot;, &quot;a3&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<p><code>y</code>修饰符的一个应用，是从字符串提取 token（词元），<code>y</code>修饰符确保了匹配之间不会有漏掉的字符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">TOKEN_Y</span> = <span class="regexp">/\s*(\+|[0-9]+)\s*/y</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">TOKEN_G</span>  = <span class="regexp">/\s*(\+|[0-9]+)\s*/g</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_">tokenize</span>(<span class="variable constant_">TOKEN_Y</span>, <span class="string">&#x27;3 + 4&#x27;</span>)</span><br><span class="line"><span class="comment">// [ &#x27;3&#x27;, &#x27;+&#x27;, &#x27;4&#x27; ]</span></span><br><span class="line"><span class="title function_">tokenize</span>(<span class="variable constant_">TOKEN_G</span>, <span class="string">&#x27;3 + 4&#x27;</span>)</span><br><span class="line"><span class="comment">// [ &#x27;3&#x27;, &#x27;+&#x27;, &#x27;4&#x27; ]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">tokenize</span>(<span class="params">TOKEN_REGEX, str</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> result = [];</span><br><span class="line">  <span class="keyword">let</span> match;</span><br><span class="line">  <span class="keyword">while</span> (match = <span class="variable constant_">TOKEN_REGEX</span>.<span class="title function_">exec</span>(str)) &#123;</span><br><span class="line">    result.<span class="title function_">push</span>(match[<span class="number">1</span>]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，如果字符串里面没有非法字符，<code>y</code>修饰符与<code>g</code>修饰符的提取结果是一样的。但是，一旦出现非法字符，两者的行为就不一样了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">tokenize</span>(<span class="variable constant_">TOKEN_Y</span>, <span class="string">&#x27;3x + 4&#x27;</span>)</span><br><span class="line"><span class="comment">// [ &#x27;3&#x27; ]</span></span><br><span class="line"><span class="title function_">tokenize</span>(<span class="variable constant_">TOKEN_G</span>, <span class="string">&#x27;3x + 4&#x27;</span>)</span><br><span class="line"><span class="comment">// [ &#x27;3&#x27;, &#x27;+&#x27;, &#x27;4&#x27; ]</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>g</code>修饰符会忽略非法字符，而<code>y</code>修饰符不会，这样就很容易发现错误。</p>
+<h2 id="RegExp-prototype-sticky-属性"><a href="#RegExp-prototype-sticky-属性" class="headerlink" title="RegExp.prototype.sticky 属性"></a>RegExp.prototype.sticky 属性</h2><p>与<code>y</code>修饰符相匹配，ES6 的正则实例对象多了<code>sticky</code>属性，表示是否设置了<code>y</code>修饰符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> r = <span class="regexp">/hello\d/y</span>;</span><br><span class="line">r.<span class="property">sticky</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="RegExp-prototype-flags-属性"><a href="#RegExp-prototype-flags-属性" class="headerlink" title="RegExp.prototype.flags 属性"></a>RegExp.prototype.flags 属性</h2><p>ES6 为正则表达式新增了<code>flags</code>属性，会返回正则表达式的修饰符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES5 的 source 属性</span></span><br><span class="line"><span class="comment">// 返回正则表达式的正文</span></span><br><span class="line">/abc/ig.<span class="property">source</span></span><br><span class="line"><span class="comment">// &quot;abc&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6 的 flags 属性</span></span><br><span class="line"><span class="comment">// 返回正则表达式的修饰符</span></span><br><span class="line">/abc/ig.<span class="property">flags</span></span><br><span class="line"><span class="comment">// &#x27;gi&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="s-修饰符：dotAll-模式"><a href="#s-修饰符：dotAll-模式" class="headerlink" title="s 修饰符：dotAll 模式"></a>s 修饰符：dotAll 模式</h2><p>正则表达式中，点（<code>.</code>）是一个特殊字符，代表任意的单个字符，但是有两个例外。一个是四个字节的 UTF-16 字符，这个可以用<code>u</code>修饰符解决；另一个是行终止符（line terminator character）。</p>
+<p>所谓行终止符，就是该字符表示一行的终结。以下四个字符属于“行终止符”。</p>
+<ul>
+<li>U+000A 换行符（<code>\n</code>）</li>
+<li>U+000D 回车符（<code>\r</code>）</li>
+<li>U+2028 行分隔符（line separator）</li>
+<li>U+2029 段分隔符（paragraph separator）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/foo.<span class="property">bar</span>/.<span class="title function_">test</span>(<span class="string">&#x27;foo\nbar&#x27;</span>)</span><br><span class="line"><span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，因为<code>.</code>不匹配<code>\n</code>，所以正则表达式返回<code>false</code>。</p>
+<p>但是，很多时候我们希望匹配的是任意单个字符，这时有一种变通的写法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/foo[^]bar/.<span class="title function_">test</span>(<span class="string">&#x27;foo\nbar&#x27;</span>)</span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>这种解决方案毕竟不太符合直觉，ES2018 <a target="_blank" rel="noopener" href="https://github.com/tc39/proposal-regexp-dotall-flag">引入</a><code>s</code>修饰符，使得<code>.</code>可以匹配任意单个字符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/foo.<span class="property">bar</span>/s.<span class="title function_">test</span>(<span class="string">&#x27;foo\nbar&#x27;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>这被称为<code>dotAll</code>模式，即点（dot）代表一切字符。所以，正则表达式还引入了一个<code>dotAll</code>属性，返回一个布尔值，表示该正则表达式是否处在<code>dotAll</code>模式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> re = <span class="regexp">/foo.bar/</span>s;</span><br><span class="line"><span class="comment">// 另一种写法</span></span><br><span class="line"><span class="comment">// const re = new RegExp(&#x27;foo.bar&#x27;, &#x27;s&#x27;);</span></span><br><span class="line"></span><br><span class="line">re.<span class="title function_">test</span>(<span class="string">&#x27;foo\nbar&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">re.<span class="property">dotAll</span> <span class="comment">// true</span></span><br><span class="line">re.<span class="property">flags</span> <span class="comment">// &#x27;s&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>/s</code>修饰符和多行修饰符<code>/m</code>不冲突，两者一起使用的情况下，<code>.</code>匹配所有字符，而<code>^</code>和<code>$</code>匹配每一行的行首和行尾。</p>
+<h2 id="后行断言"><a href="#后行断言" class="headerlink" title="后行断言"></a>后行断言</h2><p>JavaScript 语言的正则表达式，只支持先行断言（lookahead）和先行否定断言（negative lookahead），不支持后行断言（lookbehind）和后行否定断言（negative lookbehind）。ES2018 引入<a target="_blank" rel="noopener" href="https://github.com/tc39/proposal-regexp-lookbehind">后行断言</a>，V8 引擎 4.9 版（Chrome 62）已经支持。</p>
+<p>“先行断言”指的是，<code>x</code>只有在<code>y</code>前面才匹配，必须写成<code>/x(?=y)/</code>。比如，只匹配百分号之前的数字，要写成<code>/\d+(?=%)/</code>。“先行否定断言”指的是，<code>x</code>只有不在<code>y</code>前面才匹配，必须写成<code>/x(?!y)/</code>。比如，只匹配不在百分号之前的数字，要写成<code>/\d+(?!%)/</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/\d+(?=%)/.<span class="title function_">exec</span>(<span class="string">&#x27;100% of US presidents have been male&#x27;</span>)  <span class="comment">// [&quot;100&quot;]</span></span><br><span class="line">/\d+(?!%)/.<span class="title function_">exec</span>(<span class="string">&#x27;that’s all 44 of them&#x27;</span>)                 <span class="comment">// [&quot;44&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<p>上面两个字符串，如果互换正则表达式，就不会得到相同结果。另外，还可以看到，“先行断言”括号之中的部分（<code>(?=%)</code>），是不计入返回结果的。</p>
+<p>“后行断言”正好与“先行断言”相反，<code>x</code>只有在<code>y</code>后面才匹配，必须写成<code>/(?&lt;=y)x/</code>。比如，只匹配美元符号之后的数字，要写成<code>/(?&lt;=\$)\d+/</code>。“后行否定断言”则与“先行否定断言”相反，<code>x</code>只有不在<code>y</code>后面才匹配，必须写成<code>/(?&lt;!y)x/</code>。比如，只匹配不在美元符号后面的数字，要写成<code>/(?&lt;!\$)\d+/</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/(?&lt;=\$)\d+<span class="regexp">/.exec(&#x27;Benjamin Franklin is on the $100 bill&#x27;)  /</span>/ [<span class="string">&quot;100&quot;</span>]</span><br><span class="line">/(?&lt;!\$)\d+<span class="regexp">/.exec(&#x27;it’s is worth about €90&#x27;)                /</span>/ [<span class="string">&quot;90&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>上面的例子中，“后行断言”的括号之中的部分（<code>(?&lt;=\$)</code>），也是不计入返回结果。</p>
+<p>下面的例子是使用后行断言进行字符串替换。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">RE_DOLLAR_PREFIX</span> = <span class="regexp">/(?&lt;=\$)foo/g</span>;</span><br><span class="line"><span class="string">&#x27;$foo %foo foo&#x27;</span>.<span class="title function_">replace</span>(<span class="variable constant_">RE_DOLLAR_PREFIX</span>, <span class="string">&#x27;bar&#x27;</span>);</span><br><span class="line"><span class="comment">// &#x27;$bar %foo foo&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，只有在美元符号后面的<code>foo</code>才会被替换。</p>
+<p>“后行断言”的实现，需要先匹配<code>/(?&lt;=y)x/</code>的<code>x</code>，然后再回到左边，匹配<code>y</code>的部分。这种“先右后左”的执行顺序，与所有其他正则操作相反，导致了一些不符合预期的行为。</p>
+<p>首先，后行断言的组匹配，与正常情况下结果是不一样的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/(?&lt;=(\d+)(\d+))$/.<span class="title function_">exec</span>(<span class="string">&#x27;1053&#x27;</span>) <span class="comment">// [&quot;&quot;, &quot;1&quot;, &quot;053&quot;]</span></span><br><span class="line">/^(\d+)(\d+)$/.<span class="title function_">exec</span>(<span class="string">&#x27;1053&#x27;</span>) <span class="comment">// [&quot;1053&quot;, &quot;105&quot;, &quot;3&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，需要捕捉两个组匹配。没有“后行断言”时，第一个括号是贪婪模式，第二个括号只能捕获一个字符，所以结果是<code>105</code>和<code>3</code>。而“后行断言”时，由于执行顺序是从右到左，第二个括号是贪婪模式，第一个括号只能捕获一个字符，所以结果是<code>1</code>和<code>053</code>。</p>
+<p>其次，“后行断言”的反斜杠引用，也与通常的顺序相反，必须放在对应的那个括号之前。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/(?&lt;=(o)d\<span class="number">1</span>)r/.<span class="title function_">exec</span>(<span class="string">&#x27;hodor&#x27;</span>)  <span class="comment">// null</span></span><br><span class="line">/(?&lt;=\1d(o))r/.<span class="title function_">exec</span>(<span class="string">&#x27;hodor&#x27;</span>)  <span class="comment">// [&quot;r&quot;, &quot;o&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，如果后行断言的反斜杠引用（<code>\1</code>）放在括号的后面，就不会得到匹配结果，必须放在前面才可以。因为后行断言是先从左到右扫描，发现匹配以后再回过头，从右到左完成反斜杠引用。</p>
+<h2 id="Unicode-属性类"><a href="#Unicode-属性类" class="headerlink" title="Unicode 属性类"></a>Unicode 属性类</h2><p>ES2018 <a target="_blank" rel="noopener" href="https://github.com/tc39/proposal-regexp-unicode-property-escapes">引入</a>了一种新的类的写法<code>\p&#123;...&#125;</code>和<code>\P&#123;...&#125;</code>，允许正则表达式匹配符合 Unicode 某种属性的所有字符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> regexGreekSymbol = <span class="regexp">/\p&#123;Script=Greek&#125;/u</span>;</span><br><span class="line">regexGreekSymbol.<span class="title function_">test</span>(<span class="string">&#x27;π&#x27;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>\p&#123;Script=Greek&#125;</code>指定匹配一个希腊文字母，所以匹配<code>π</code>成功。</p>
+<p>Unicode 属性类要指定属性名和属性值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\p&#123;<span class="title class_">UnicodePropertyName</span>=<span class="title class_">UnicodePropertyValue</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于某些属性，可以只写属性名，或者只写属性值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\p&#123;<span class="title class_">UnicodePropertyName</span>&#125;</span><br><span class="line">\p&#123;<span class="title class_">UnicodePropertyValue</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>\P&#123;…&#125;</code>是<code>\p&#123;…&#125;</code>的反向匹配，即匹配不满足条件的字符。</p>
+<p>注意，这两种类只对 Unicode 有效，所以使用的时候一定要加上<code>u</code>修饰符。如果不加<code>u</code>修饰符，正则表达式使用<code>\p</code>和<code>\P</code>会报错，ECMAScript 预留了这两个类。</p>
+<p>由于 Unicode 的各种属性非常多，所以这种新的类的表达能力非常强。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> regex = <span class="regexp">/^\p&#123;Decimal_Number&#125;+$/u</span>;</span><br><span class="line">regex.<span class="title function_">test</span>(<span class="string">&#x27;𝟏𝟐𝟑𝟜𝟝𝟞𝟩𝟪𝟫𝟬𝟭𝟮𝟯𝟺𝟻𝟼&#x27;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，属性类指定匹配所有十进制字符，可以看到各种字型的十进制字符都会匹配成功。</p>
+<p><code>\p&#123;Number&#125;</code>甚至能匹配罗马数字。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 匹配所有数字</span></span><br><span class="line"><span class="keyword">const</span> regex = <span class="regexp">/^\p&#123;Number&#125;+$/u</span>;</span><br><span class="line">regex.<span class="title function_">test</span>(<span class="string">&#x27;²³¹¼½¾&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">regex.<span class="title function_">test</span>(<span class="string">&#x27;㉛㉜㉝&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">regex.<span class="title function_">test</span>(<span class="string">&#x27;ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫ&#x27;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>下面是其他一些例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 匹配所有空格</span></span><br><span class="line">\p&#123;<span class="title class_">White</span>_Space&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 匹配各种文字的所有字母，等同于 Unicode 版的 \w</span></span><br><span class="line">[\p&#123;<span class="title class_">Alphabetic</span>&#125;\p&#123;<span class="title class_">Mark</span>&#125;\p&#123;<span class="title class_">Decimal</span>_Number&#125;\p&#123;<span class="title class_">Connector</span>_Punctuation&#125;\p&#123;<span class="title class_">Join</span>_Control&#125;]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 匹配各种文字的所有非字母的字符，等同于 Unicode 版的 \W</span></span><br><span class="line">[^\p&#123;<span class="title class_">Alphabetic</span>&#125;\p&#123;<span class="title class_">Mark</span>&#125;\p&#123;<span class="title class_">Decimal</span>_Number&#125;\p&#123;<span class="title class_">Connector</span>_Punctuation&#125;\p&#123;<span class="title class_">Join</span>_Control&#125;]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 匹配 Emoji</span></span><br><span class="line">/\p&#123;<span class="title class_">Emoji</span>_Modifier_Base&#125;\p&#123;<span class="title class_">Emoji</span>_Modifier&#125;?|\p&#123;<span class="title class_">Emoji</span>_Presentation&#125;|\p&#123;<span class="title class_">Emoji</span>&#125;\uFE0F/gu</span><br><span class="line"></span><br><span class="line"><span class="comment">// 匹配所有的箭头字符</span></span><br><span class="line"><span class="keyword">const</span> regexArrows = <span class="regexp">/^\p&#123;Block=Arrows&#125;+$/u</span>;</span><br><span class="line">regexArrows.<span class="title function_">test</span>(<span class="string">&#x27;←↑→↓↔↕↖↗↘↙⇏⇐⇑⇒⇓⇔⇕⇖⇗⇘⇙⇧⇩&#x27;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="具名组匹配"><a href="#具名组匹配" class="headerlink" title="具名组匹配"></a>具名组匹配</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>正则表达式使用圆括号进行组匹配。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">RE_DATE</span> = <span class="regexp">/(\d&#123;4&#125;)-(\d&#123;2&#125;)-(\d&#123;2&#125;)/</span>;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，正则表达式里面有三组圆括号。使用<code>exec</code>方法，就可以将这三组匹配结果提取出来。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">RE_DATE</span> = <span class="regexp">/(\d&#123;4&#125;)-(\d&#123;2&#125;)-(\d&#123;2&#125;)/</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> matchObj = <span class="variable constant_">RE_DATE</span>.<span class="title function_">exec</span>(<span class="string">&#x27;1999-12-31&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> year = matchObj[<span class="number">1</span>]; <span class="comment">// 1999</span></span><br><span class="line"><span class="keyword">const</span> month = matchObj[<span class="number">2</span>]; <span class="comment">// 12</span></span><br><span class="line"><span class="keyword">const</span> day = matchObj[<span class="number">3</span>]; <span class="comment">// 31</span></span><br></pre></td></tr></table></figure>
+
+<p>组匹配的一个问题是，每一组的匹配含义不容易看出来，而且只能用数字序号（比如<code>matchObj[1]</code>）引用，要是组的顺序变了，引用的时候就必须修改序号。</p>
+<p>ES2018 引入了<a target="_blank" rel="noopener" href="https://github.com/tc39/proposal-regexp-named-groups">具名组匹配</a>（Named Capture Groups），允许为每一个组匹配指定一个名字，既便于阅读代码，又便于引用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">RE_DATE</span> = <span class="regexp">/(?&lt;year&gt;\d&#123;4&#125;)-(?&lt;month&gt;\d&#123;2&#125;)-(?&lt;day&gt;\d&#123;2&#125;)/</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> matchObj = <span class="variable constant_">RE_DATE</span>.<span class="title function_">exec</span>(<span class="string">&#x27;1999-12-31&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> year = matchObj.<span class="property">groups</span>.<span class="property">year</span>; <span class="comment">// 1999</span></span><br><span class="line"><span class="keyword">const</span> month = matchObj.<span class="property">groups</span>.<span class="property">month</span>; <span class="comment">// 12</span></span><br><span class="line"><span class="keyword">const</span> day = matchObj.<span class="property">groups</span>.<span class="property">day</span>; <span class="comment">// 31</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，“具名组匹配”在圆括号内部，模式的头部添加“问号 + 尖括号 + 组名”（<code>?&lt;year&gt;</code>），然后就可以在<code>exec</code>方法返回结果的<code>groups</code>属性上引用该组名。同时，数字序号（<code>matchObj[1]</code>）依然有效。</p>
+<p>具名组匹配等于为每一组匹配加上了 ID，便于描述匹配的目的。如果组的顺序变了，也不用改变匹配后的处理代码。</p>
+<p>如果具名组没有匹配，那么对应的<code>groups</code>对象属性会是<code>undefined</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">RE_OPT_A</span> = <span class="regexp">/^(?&lt;as&gt;a+)?$/</span>;</span><br><span class="line"><span class="keyword">const</span> matchObj = <span class="variable constant_">RE_OPT_A</span>.<span class="title function_">exec</span>(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line"></span><br><span class="line">matchObj.<span class="property">groups</span>.<span class="property">as</span> <span class="comment">// undefined</span></span><br><span class="line"><span class="string">&#x27;as&#x27;</span> <span class="keyword">in</span> matchObj.<span class="property">groups</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，具名组<code>as</code>没有找到匹配，那么<code>matchObj.groups.as</code>属性值就是<code>undefined</code>，并且<code>as</code>这个键名在<code>groups</code>是始终存在的。</p>
+<h3 id="解构赋值和替换"><a href="#解构赋值和替换" class="headerlink" title="解构赋值和替换"></a>解构赋值和替换</h3><p>有了具名组匹配以后，可以使用解构赋值直接从匹配结果上为变量赋值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> &#123;<span class="attr">groups</span>: &#123;one, two&#125;&#125; = <span class="regexp">/^(?&lt;one&gt;.*):(?&lt;two&gt;.*)$/u</span>.<span class="title function_">exec</span>(<span class="string">&#x27;foo:bar&#x27;</span>);</span><br><span class="line">one  <span class="comment">// foo</span></span><br><span class="line">two  <span class="comment">// bar</span></span><br></pre></td></tr></table></figure>
+
+<p>字符串替换时，使用<code>$&lt;组名&gt;</code>引用具名组。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> re = <span class="regexp">/(?&lt;year&gt;\d&#123;4&#125;)-(?&lt;month&gt;\d&#123;2&#125;)-(?&lt;day&gt;\d&#123;2&#125;)/u</span>;</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;2015-01-02&#x27;</span>.<span class="title function_">replace</span>(re, <span class="string">&#x27;$&lt;day&gt;/$&lt;month&gt;/$&lt;year&gt;&#x27;</span>)</span><br><span class="line"><span class="comment">// &#x27;02/01/2015&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>replace</code>方法的第二个参数是一个字符串，而不是正则表达式。</p>
+<p><code>replace</code>方法的第二个参数也可以是函数，该函数的参数序列如下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;2015-01-02&#x27;</span>.<span class="title function_">replace</span>(re, <span class="function">(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">   matched, <span class="comment">// 整个匹配结果 2015-01-02</span></span></span></span><br><span class="line"><span class="params"><span class="function">   capture1, <span class="comment">// 第一个组匹配 2015</span></span></span></span><br><span class="line"><span class="params"><span class="function">   capture2, <span class="comment">// 第二个组匹配 01</span></span></span></span><br><span class="line"><span class="params"><span class="function">   capture3, <span class="comment">// 第三个组匹配 02</span></span></span></span><br><span class="line"><span class="params"><span class="function">   position, <span class="comment">// 匹配开始的位置 0</span></span></span></span><br><span class="line"><span class="params"><span class="function">   S, <span class="comment">// 原字符串 2015-01-02</span></span></span></span><br><span class="line"><span class="params"><span class="function">   groups <span class="comment">// 具名组构成的一个对象 &#123;year, month, day&#125;</span></span></span></span><br><span class="line"><span class="params"><span class="function"> </span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="keyword">let</span> &#123;day, month, year&#125; = groups;</span><br><span class="line"> <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;day&#125;</span>/<span class="subst">$&#123;month&#125;</span>/<span class="subst">$&#123;year&#125;</span>`</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>具名组匹配在原来的基础上，新增了最后一个函数参数：具名组构成的一个对象。函数内部可以直接对这个对象进行解构赋值。</p>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>如果要在正则表达式内部引用某个“具名组匹配”，可以使用<code>\k&lt;组名&gt;</code>的写法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">RE_TWICE</span> = <span class="regexp">/^(?&lt;word&gt;[a-z]+)!\k&lt;word&gt;$/</span>;</span><br><span class="line"><span class="variable constant_">RE_TWICE</span>.<span class="title function_">test</span>(<span class="string">&#x27;abc!abc&#x27;</span>) <span class="comment">// true</span></span><br><span class="line"><span class="variable constant_">RE_TWICE</span>.<span class="title function_">test</span>(<span class="string">&#x27;abc!ab&#x27;</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>数字引用（<code>\1</code>）依然有效。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">RE_TWICE</span> = <span class="regexp">/^(?&lt;word&gt;[a-z]+)!\1$/</span>;</span><br><span class="line"><span class="variable constant_">RE_TWICE</span>.<span class="title function_">test</span>(<span class="string">&#x27;abc!abc&#x27;</span>) <span class="comment">// true</span></span><br><span class="line"><span class="variable constant_">RE_TWICE</span>.<span class="title function_">test</span>(<span class="string">&#x27;abc!ab&#x27;</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>这两种引用语法还可以同时使用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">RE_TWICE</span> = <span class="regexp">/^(?&lt;word&gt;[a-z]+)!\k&lt;word&gt;!\1$/</span>;</span><br><span class="line"><span class="variable constant_">RE_TWICE</span>.<span class="title function_">test</span>(<span class="string">&#x27;abc!abc!abc&#x27;</span>) <span class="comment">// true</span></span><br><span class="line"><span class="variable constant_">RE_TWICE</span>.<span class="title function_">test</span>(<span class="string">&#x27;abc!abc!ab&#x27;</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="String-prototype-matchAll"><a href="#String-prototype-matchAll" class="headerlink" title="String.prototype.matchAll()"></a>String.prototype.matchAll()</h2><p>如果一个正则表达式在字符串里面有多个匹配，现在一般使用<code>g</code>修饰符或<code>y</code>修饰符，在循环里面逐一取出。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> regex = <span class="regexp">/t(e)(st(\d?))/g</span>;</span><br><span class="line"><span class="keyword">var</span> string = <span class="string">&#x27;test1test2test3&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> matches = [];</span><br><span class="line"><span class="keyword">var</span> match;</span><br><span class="line"><span class="keyword">while</span> (match = regex.<span class="title function_">exec</span>(string)) &#123;</span><br><span class="line">  matches.<span class="title function_">push</span>(match);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">matches</span><br><span class="line"><span class="comment">// [</span></span><br><span class="line"><span class="comment">//   [&quot;test1&quot;, &quot;e&quot;, &quot;st1&quot;, &quot;1&quot;, index: 0, input: &quot;test1test2test3&quot;],</span></span><br><span class="line"><span class="comment">//   [&quot;test2&quot;, &quot;e&quot;, &quot;st2&quot;, &quot;2&quot;, index: 5, input: &quot;test1test2test3&quot;],</span></span><br><span class="line"><span class="comment">//   [&quot;test3&quot;, &quot;e&quot;, &quot;st3&quot;, &quot;3&quot;, index: 10, input: &quot;test1test2test3&quot;]</span></span><br><span class="line"><span class="comment">// ]</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>while</code>循环取出每一轮的正则匹配，一共三轮。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/tc39/proposal-string-matchall">ES2020</a> 增加了<code>String.prototype.matchAll()</code>方法，可以一次性取出所有匹配。不过，它返回的是一个遍历器（Iterator），而不是数组。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> string = <span class="string">&#x27;test1test2test3&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// g 修饰符加不加都可以</span></span><br><span class="line"><span class="keyword">const</span> regex = <span class="regexp">/t(e)(st(\d?))/g</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> match <span class="keyword">of</span> string.<span class="title function_">matchAll</span>(regex)) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(match);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// [&quot;test1&quot;, &quot;e&quot;, &quot;st1&quot;, &quot;1&quot;, index: 0, input: &quot;test1test2test3&quot;]</span></span><br><span class="line"><span class="comment">// [&quot;test2&quot;, &quot;e&quot;, &quot;st2&quot;, &quot;2&quot;, index: 5, input: &quot;test1test2test3&quot;]</span></span><br><span class="line"><span class="comment">// [&quot;test3&quot;, &quot;e&quot;, &quot;st3&quot;, &quot;3&quot;, index: 10, input: &quot;test1test2test3&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，由于<code>string.matchAll(regex)</code>返回的是遍历器，所以可以用<code>for...of</code>循环取出。相对于返回数组，返回遍历器的好处在于，如果匹配结果是一个很大的数组，那么遍历器比较节省资源。</p>
+<p>遍历器转为数组是非常简单的，使用<code>...</code>运算符和<code>Array.from()</code>方法就可以了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 转为数组方法一</span></span><br><span class="line">[...string.<span class="title function_">matchAll</span>(regex)]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 转为数组方法二</span></span><br><span class="line"><span class="title class_">Array</span>.<span class="title function_">from</span>(string.<span class="title function_">matchAll</span>(regex))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/pages/0473261a6ab0ee8c" data-id="cm2n1iusx000i9sr3exwr0dtd" data-title="正则的扩展" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/pages/a650b4a0ebfc9350" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          字符串的新增方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/pages/5dfea9a0f2d1a392" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">数值的扩展</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8AES6-%E6%95%99%E7%A8%8B%E3%80%8B%E7%AC%94%E8%AE%B0/">《ES6 教程》笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8AJavaScript%E6%95%99%E7%A8%8B%E3%80%8B%E7%AC%94%E8%AE%B0/">《JavaScript教程》笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/10/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bnew%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bcall%E5%92%8Capply%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bbind%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8B%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

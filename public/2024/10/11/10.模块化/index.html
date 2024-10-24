@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一、全局函数式编程在早期的Web开发中，通常使用全局范围内声明函数和变量的方式来组织代码。例如： 1234var module1Data &#x3D; &#x27;module1 data&#x27;;function module1Func()&#123;    console.log(module1Data);&#125;  这种方式存在的问题主要有命名冲突、函数间依赖关系不明显、项目体积变大后难以维护">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2024/10/11/10.%E6%A8%A1%E5%9D%97%E5%8C%96/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、全局函数式编程在早期的Web开发中，通常使用全局范围内声明函数和变量的方式来组织代码。例如： 1234var module1Data &#x3D; &#x27;module1 data&#x27;;function module1Func()&#123;    console.log(module1Data);&#125;  这种方式存在的问题主要有命名冲突、函数间依赖关系不明显、项目体积变大后难以维护">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-10-11T00:29:26.667Z">
+<meta property="article:modified_time" content="2024-10-11T00:29:27.124Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-10.模块化" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/11/10.%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
+  <time class="dt-published" datetime="2024-10-11T00:29:26.667Z" itemprop="datePublished">2024-10-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、全局函数式编程"><a href="#一、全局函数式编程" class="headerlink" title="一、全局函数式编程"></a>一、全局函数式编程</h2><p>在早期的Web开发中，通常使用全局范围内声明函数和变量的方式来组织代码。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> module1Data = <span class="string">&#x27;module1 data&#x27;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">module1Func</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(module1Data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种方式存在的问题主要有命名冲突、函数间依赖关系不明显、项目体积变大后难以维护、无法合理的管理项目依赖和版本、无法方便控制依赖的加载顺序等。</p>
+<h2 id="二、命名空间模式"><a href="#二、命名空间模式" class="headerlink" title="二、命名空间模式"></a>二、命名空间模式</h2><p>随着对代码组织方式的需求增加，开发者开始通过定义全局对象，将所有函数和变量封装在这个对象中，也就是命名空间模式。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myApp = &#123;</span><br><span class="line">    <span class="attr">module1Data</span>: <span class="string">&#x27;module1 data&#x27;</span>,</span><br><span class="line">    <span class="attr">module1Func</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">module1Data</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这种方式解决了全局命名冲突的问题，但是模块间的依赖关系依旧不明显，同时所有依赖都需要在命名空间对象中手动管理。</p>
+<h2 id="三、CommonJs"><a href="#三、CommonJs" class="headerlink" title="三、CommonJs"></a>三、CommonJs</h2><p>CommonJS模块规范是Node.js采用的规范，使用<code>require</code>函数加载模块，通过<code>module.exports</code>导出模块。</p>
+<blockquote>
+<p>同步加载 依赖的模块</p>
+<p>可复用于Node.js环境，例如做同构应用</p>
+<p>成熟的第三方模块社区</p>
+<p>无法直接运行于浏览器环境，必须通过工具转换为标准的ES5</p>
+<p>存在缓存，适用于服务器端</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="string">&#x27;Hello world&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">&#x27;./a&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 输出 &#x27;Hello world&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>CommonJS使用同步加载方式，适用于服务器端，但由于网络请求的异步特性，不适合在浏览器环境使用。</p>
+<h3 id="require函数"><a href="#require函数" class="headerlink" title="require函数"></a>require函数</h3><p>主要任务是根据模块的文件路径读取模块文件，然后执行模块代码，最后返回模块的<code>exports</code>对象。</p>
+<p>require函数实现代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">require</span>(<span class="params">modulePath</span>)&#123;</span><br><span class="line">    <span class="comment">// 读取模块代码</span></span><br><span class="line">    <span class="keyword">const</span> code = fs.<span class="title function_">readFileSync</span>(modulePath);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 包装模块代码</span></span><br><span class="line">    <span class="keyword">const</span> wrapper = <span class="title class_">Function</span>(<span class="string">&#x27;exports&#x27;</span>, <span class="string">&#x27;require&#x27;</span>, <span class="string">&#x27;module&#x27;</span>, <span class="string">&#x27;__filename&#x27;</span>, <span class="string">&#x27;__dirname&#x27;</span>, <span class="string">`<span class="subst">$&#123;code&#125;</span>\n return module.exports;`</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">exports</span> = &#123;&#125;;</span><br><span class="line">    <span class="keyword">const</span> <span class="variable language_">module</span> = &#123; <span class="built_in">exports</span> &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 执行模块代码</span></span><br><span class="line">    <span class="title function_">wrapper</span>(<span class="built_in">exports</span>, <span class="built_in">require</span>, <span class="variable language_">module</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 返回模块的exports对象</span></span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">module</span>.<span class="property">exports</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>其中，<code>wrapper</code>函数的参数<code>exports</code>和<code>module</code>就是模块的<code>exports</code>和<code>module</code>对象，这样我们就可以在模块中通过<code>exports</code>和<code>module.exports</code>来导出模块。</p>
+<p><code>require</code>函数在执行模块代码时，会先将模块代码包装到一个函数中，然后调用这个函数。这样做的好处是可以将模块代码隔离到一个函数作用域中，防止模块内的变量污染全局作用域。</p>
+<h3 id="module-exports"><a href="#module-exports" class="headerlink" title="module.exports"></a>module.exports</h3><p>每个CommonJS模块都有一个<code>module</code>对象，这个对象有一个<code>exports</code>属性用于导出模块。当其他模块通过<code>require</code>函数加载这个模块时，就可以获取到<code>module.exports</code>对象。<code>module.exports</code>的初始值是一个空对象<code>&#123;&#125;</code>，我们可以添加属性到这个对象上，也可以直接将<code>module.exports</code>赋值为一个函数或其他类型的值。</p>
+<p>如何使用module.export导出一个函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Hello world&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">&#x27;./a&#x27;</span>);</span><br><span class="line"><span class="title function_">a</span>(); <span class="comment">// 输出 &#x27;Hello world&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>以上就是CommonJS模块的实现原理。虽然CommonJS主要用于服务器端，但其模块化思想和实现方式对于前端模块化的发展有着深远影响。</p>
+<h2 id="四、AMD"><a href="#四、AMD" class="headerlink" title="四、AMD"></a>四、AMD</h2><p>AMD规范是由RequireJS提出的，特点是异步加载模块，适合用在浏览器环境。</p>
+<blockquote>
+<p>异步加载依赖的模块</p>
+<p>并行加载多个模块</p>
+<p>可在不转换代码的情况下直接在浏览器运行</p>
+<p>可运行在浏览器和node.js环境</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// AMD</span></span><br><span class="line"><span class="title function_">define</span>([<span class="string">&#x27;dependency&#x27;</span>], <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;module content&#x27;</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>AMD规范的语法较为复杂，但能在浏览器环境中异步加载模块。</p>
+<h2 id="五、UMD"><a href="#五、UMD" class="headerlink" title="五、UMD"></a>五、UMD</h2><p>UMD规范试图提供一种解决方案，让同一段代码在CommonJS和AMD环境中都能运行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> (<span class="params">root, factory</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">&#x27;function&#x27;</span> &amp;&amp; define.<span class="property">amd</span>) &#123;</span><br><span class="line">        <span class="comment">// AMD</span></span><br><span class="line">       </span><br><span class="line"></span><br><span class="line"> <span class="title function_">define</span>([<span class="string">&#x27;jquery&#x27;</span>], factory);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">exports</span> === <span class="string">&#x27;object&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment">// Node, CommonJS</span></span><br><span class="line">        <span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title function_">factory</span>(<span class="built_in">require</span>(<span class="string">&#x27;jquery&#x27;</span>));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 浏览器全局变量</span></span><br><span class="line">        root.<span class="property">returnExports</span> = <span class="title function_">factory</span>(root.<span class="property">jQuery</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;(<span class="variable language_">this</span>, <span class="keyword">function</span> (<span class="params">$</span>) &#123;</span><br><span class="line">    <span class="comment">// 模块代码</span></span><br><span class="line">&#125;));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>UMD通过判断环境中是否存在<code>define</code>和<code>exports</code>对象，来判断是哪种模块环境，从而使用对应的模块化方案。</p>
+<h2 id="六、ES6模块化"><a href="#六、ES6模块化" class="headerlink" title="六、ES6模块化"></a>六、ES6模块化</h2><p>ES6模块化是ECMAScript 6（ES2015）中新引入的模块系统，使用<code>import</code>关键字加载模块，通过<code>export</code>关键字导出模块。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> a = <span class="string">&#x27;Hello world&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; a &#125; <span class="keyword">from</span> <span class="string">&#x27;./a.js&#x27;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 输出 &#x27;Hello world&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>ES6模块化具有静态性，这种静态性质让依赖关系更加明显，有利于工具进行优化。此外，ES6模块是异步加载，也适合在浏览器环境中使用。</p>
+<p>模块化是前端开发中的一种重要的编程思想，它让代码组织更加清晰，便于维护和重用。经过多年的发展，前端模块化方案已经从简单的全局函数，发展到当前的ES6模块化。每一种模块化方案都有其适用场景，选择哪种方案主要取决于项目的需求。理解不同模块化方案的实现原理，可以帮助我们更好地使用和选择这些工具。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/11/10.%E6%A8%A1%E5%9D%97%E5%8C%96/" data-id="cm2n1iut300109sr3fedkag6e" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/10/11/JavaScript%E4%B8%93%E9%A2%98%E4%B9%8B%E4%BB%8E%E9%9B%B6%E5%AE%9E%E7%8E%B0jQuery%E7%9A%84extend/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/10/11/09.map%E5%92%8CforEach%E7%9A%84%E5%8C%BA%E5%88%AB/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8AES6-%E6%95%99%E7%A8%8B%E3%80%8B%E7%AC%94%E8%AE%B0/">《ES6 教程》笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8AJavaScript%E6%95%99%E7%A8%8B%E3%80%8B%E7%AC%94%E8%AE%B0/">《JavaScript教程》笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/10/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bnew%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bcall%E5%92%8Capply%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bbind%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8B%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

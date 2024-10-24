@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/7/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-JavaScript专题之函数记忆" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/11/JavaScript%E4%B8%93%E9%A2%98%E4%B9%8B%E5%87%BD%E6%95%B0%E8%AE%B0%E5%BF%86/" class="article-date">
+  <time class="dt-published" datetime="2024-10-11T00:29:57.942Z" itemprop="datePublished">2024-10-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript-专题之函数记忆"><a href="#JavaScript-专题之函数记忆" class="headerlink" title="JavaScript 专题之函数记忆"></a>JavaScript 专题之函数记忆</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>函数记忆是指将上次的计算结果缓存起来，当下次调用时，如果遇到相同的参数，就直接返回缓存中的数据。</p>
+<p>举个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 假设 memorize 可以实现函数记忆</span></span><br><span class="line"><span class="keyword">var</span> memoizedAdd = <span class="title function_">memorize</span>(add);</span><br><span class="line"></span><br><span class="line"><span class="title function_">memoizedAdd</span>(<span class="number">1</span>, <span class="number">2</span>) <span class="comment">// 3</span></span><br><span class="line"><span class="title function_">memoizedAdd</span>(<span class="number">1</span>, <span class="number">2</span>) <span class="comment">// 相同的参数，第二次调用时，从缓存中取出数据，而非重新计算一次</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>实现这样一个 memorize 函数很简单，原理上只用把参数和对应的结果数据存到一个对象中，调用时，判断参数对应的数据是否存在，存在就返回对应的结果数据。</p>
+<h2 id="第一版"><a href="#第一版" class="headerlink" title="第一版"></a>第一版</h2><p>我们来写一版：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一版 (来自《JavaScript权威指南》)</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">memoize</span>(<span class="params">f</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> cache = &#123;&#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">var</span> key = <span class="variable language_">arguments</span>.<span class="property">length</span> + <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">join</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>, <span class="string">&quot;,&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (key <span class="keyword">in</span> cache) &#123;</span><br><span class="line">            <span class="keyword">return</span> cache[key]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> cache[key] = f.<span class="title function_">apply</span>(<span class="variable language_">this</span>, <span class="variable language_">arguments</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们来测试一下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> add = <span class="keyword">function</span>(<span class="params">a, b, c</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> a + b + c</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> memoizedAdd = <span class="title function_">memorize</span>(add)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">time</span>(<span class="string">&#x27;use memorize&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++) &#123;</span><br><span class="line">    <span class="title function_">memoizedAdd</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">timeEnd</span>(<span class="string">&#x27;use memorize&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">time</span>(<span class="string">&#x27;not use memorize&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++) &#123;</span><br><span class="line">    <span class="title function_">add</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">timeEnd</span>(<span class="string">&#x27;not use memorize&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在 Chrome 中，使用 memorize 大约耗时 60ms，如果我们不使用函数记忆，大约耗时 1.3 ms 左右。</p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>什么，我们使用了看似高大上的函数记忆，结果却更加耗时，这个例子近乎有 60 倍呢！</p>
+<p>所以，函数记忆也并不是万能的，你看这个简单的场景，其实并不适合用函数记忆。</p>
+<p>需要注意的是，函数记忆只是一种编程技巧，本质上是牺牲算法的空间复杂度以换取更优的时间复杂度，在客户端 JavaScript 中代码的执行时间复杂度往往成为瓶颈，因此在大多数场景下，这种牺牲空间换取时间的做法以提升程序执行效率的做法是非常可取的。</p>
+<h2 id="第二版"><a href="#第二版" class="headerlink" title="第二版"></a>第二版</h2><p>因为第一版使用了 join 方法，我们很容易想到当参数是对象的时候，就会自动调用 toString 方法转换成 <code>[Object object]</code>，再拼接字符串作为 key 值。我们写个 demo 验证一下这个问题：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> propValue = <span class="keyword">function</span>(<span class="params">obj</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> obj.<span class="property">value</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> memoizedAdd = <span class="title function_">memorize</span>(propValue)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">memoizedAdd</span>(&#123;<span class="attr">value</span>: <span class="number">1</span>&#125;)) <span class="comment">// 1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">memoizedAdd</span>(&#123;<span class="attr">value</span>: <span class="number">2</span>&#125;)) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>两者都返回了 1，显然是有问题的，所以我们看看 underscore 的 memoize 函数是如何实现的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第二版 (来自 underscore 的实现)</span></span><br><span class="line"><span class="keyword">var</span> memorize = <span class="keyword">function</span>(<span class="params">func, hasher</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> memoize = <span class="keyword">function</span>(<span class="params">key</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> cache = memoize.<span class="property">cache</span>;</span><br><span class="line">        <span class="keyword">var</span> address = <span class="string">&#x27;&#x27;</span> + (hasher ? hasher.<span class="title function_">apply</span>(<span class="variable language_">this</span>, <span class="variable language_">arguments</span>) : key);</span><br><span class="line">        <span class="keyword">if</span> (!cache[address]) &#123;</span><br><span class="line">            cache[address] = func.<span class="title function_">apply</span>(<span class="variable language_">this</span>, <span class="variable language_">arguments</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cache[address];</span><br><span class="line">    &#125;;</span><br><span class="line">    memoize.<span class="property">cache</span> = &#123;&#125;;</span><br><span class="line">    <span class="keyword">return</span> memoize;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>从这个实现可以看出，underscore 默认使用 function 的第一个参数作为 key，所以如果直接使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> add = <span class="keyword">function</span>(<span class="params">a, b, c</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> a + b + c</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> memoizedAdd = <span class="title function_">memorize</span>(add)</span><br><span class="line"></span><br><span class="line"><span class="title function_">memoizedAdd</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) <span class="comment">// 6</span></span><br><span class="line"><span class="title function_">memoizedAdd</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>) <span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
+
+<p>肯定是有问题的，如果要支持多参数，我们就需要传入 hasher 函数，自定义存储的 key 值。所以我们考虑使用 JSON.stringify：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> memoizedAdd = <span class="title function_">memorize</span>(add, <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> args = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(args)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">memoizedAdd</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)) <span class="comment">// 6</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">memoizedAdd</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>)) <span class="comment">// 7</span></span><br></pre></td></tr></table></figure>
+
+<p>如果使用 JSON.stringify，参数是对象的问题也可以得到解决，因为存储的是对象序列化后的字符串。</p>
+<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>我们以斐波那契数列为例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> fibonacci = <span class="keyword">function</span>(<span class="params">n</span>)&#123;</span><br><span class="line">    count++;</span><br><span class="line">    <span class="keyword">return</span> n &lt; <span class="number">2</span>? n : <span class="title function_">fibonacci</span>(n-<span class="number">1</span>) + <span class="title function_">fibonacci</span>(n-<span class="number">2</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= <span class="number">10</span>; i++)&#123;</span><br><span class="line">    <span class="title function_">fibonacci</span>(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(count) <span class="comment">// 453</span></span><br></pre></td></tr></table></figure>
+
+<p>我们会发现最后的 count 数为 453，也就是说 fibonacci 函数被调用了 453 次！也许你会想，我只是循环到了 10，为什么就被调用了这么多次，所以我们来具体分析下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">当执行 <span class="title function_">fib</span>(<span class="number">0</span>) 时，调用 <span class="number">1</span> 次</span><br><span class="line"></span><br><span class="line">当执行 <span class="title function_">fib</span>(<span class="number">1</span>) 时，调用 <span class="number">1</span> 次</span><br><span class="line"></span><br><span class="line">当执行 <span class="title function_">fib</span>(<span class="number">2</span>) 时，相当于 <span class="title function_">fib</span>(<span class="number">1</span>) + <span class="title function_">fib</span>(<span class="number">0</span>) 加上 <span class="title function_">fib</span>(<span class="number">2</span>) 本身这一次，共 <span class="number">1</span> + <span class="number">1</span> + <span class="number">1</span> = <span class="number">3</span> 次</span><br><span class="line"></span><br><span class="line">当执行 <span class="title function_">fib</span>(<span class="number">3</span>) 时，相当于 <span class="title function_">fib</span>(<span class="number">2</span>) + <span class="title function_">fib</span>(<span class="number">1</span>) 加上 <span class="title function_">fib</span>(<span class="number">3</span>) 本身这一次，共 <span class="number">3</span> + <span class="number">1</span> + <span class="number">1</span> = <span class="number">5</span> 次</span><br><span class="line"></span><br><span class="line">当执行 <span class="title function_">fib</span>(<span class="number">4</span>) 时，相当于 <span class="title function_">fib</span>(<span class="number">3</span>) + <span class="title function_">fib</span>(<span class="number">2</span>) 加上 <span class="title function_">fib</span>(<span class="number">4</span>) 本身这一次，共 <span class="number">5</span> + <span class="number">3</span> + <span class="number">1</span> = <span class="number">9</span> 次</span><br><span class="line"></span><br><span class="line">当执行 <span class="title function_">fib</span>(<span class="number">5</span>) 时，相当于 <span class="title function_">fib</span>(<span class="number">4</span>) + <span class="title function_">fib</span>(<span class="number">3</span>) 加上 <span class="title function_">fib</span>(<span class="number">5</span>) 本身这一次，共 <span class="number">9</span> + <span class="number">5</span> + <span class="number">1</span> = <span class="number">15</span> 次</span><br><span class="line"></span><br><span class="line">当执行 <span class="title function_">fib</span>(<span class="number">6</span>) 时，相当于 <span class="title function_">fib</span>(<span class="number">5</span>) + <span class="title function_">fib</span>(<span class="number">4</span>) 加上 <span class="title function_">fib</span>(<span class="number">6</span>) 本身这一次，共 <span class="number">15</span> + <span class="number">9</span> + <span class="number">1</span> = <span class="number">25</span> 次</span><br><span class="line"></span><br><span class="line">当执行 <span class="title function_">fib</span>(<span class="number">7</span>) 时，相当于 <span class="title function_">fib</span>(<span class="number">6</span>) + <span class="title function_">fib</span>(<span class="number">5</span>) 加上 <span class="title function_">fib</span>(<span class="number">7</span>) 本身这一次，共 <span class="number">25</span> + <span class="number">15</span> + <span class="number">1</span> = <span class="number">41</span> 次</span><br><span class="line"></span><br><span class="line">当执行 <span class="title function_">fib</span>(<span class="number">8</span>) 时，相当于 <span class="title function_">fib</span>(<span class="number">7</span>) + <span class="title function_">fib</span>(<span class="number">6</span>) 加上 <span class="title function_">fib</span>(<span class="number">8</span>) 本身这一次，共 <span class="number">41</span> + <span class="number">25</span> + <span class="number">1</span> = <span class="number">67</span> 次</span><br><span class="line"></span><br><span class="line">当执行 <span class="title function_">fib</span>(<span class="number">9</span>) 时，相当于 <span class="title function_">fib</span>(<span class="number">8</span>) + <span class="title function_">fib</span>(<span class="number">7</span>) 加上 <span class="title function_">fib</span>(<span class="number">9</span>) 本身这一次，共 <span class="number">67</span> + <span class="number">41</span> + <span class="number">1</span> = <span class="number">109</span> 次</span><br><span class="line"></span><br><span class="line">当执行 <span class="title function_">fib</span>(<span class="number">10</span>) 时，相当于 <span class="title function_">fib</span>(<span class="number">9</span>) + <span class="title function_">fib</span>(<span class="number">8</span>) 加上 <span class="title function_">fib</span>(<span class="number">10</span>) 本身这一次，共 <span class="number">109</span> + <span class="number">67</span> + <span class="number">1</span> = <span class="number">177</span> 次</span><br></pre></td></tr></table></figure>
+
+<p>所以执行的总次数为：177 + 109 + 67 + 41 + 25 + 15 + 9 + 5 + 3 + 1 + 1 &#x3D; 453 次！</p>
+<p>如果我们使用函数记忆呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> fibonacci = <span class="keyword">function</span>(<span class="params">n</span>) &#123;</span><br><span class="line">    count++;</span><br><span class="line">    <span class="keyword">return</span> n &lt; <span class="number">2</span> ? n : <span class="title function_">fibonacci</span>(n - <span class="number">1</span>) + <span class="title function_">fibonacci</span>(n - <span class="number">2</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">fibonacci = <span class="title function_">memorize</span>(fibonacci)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="title function_">fibonacci</span>(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(count) <span class="comment">// 12</span></span><br></pre></td></tr></table></figure>
+
+<p>我们会发现最后的总次数为 12 次，因为使用了函数记忆，调用次数从 453 次降低为了 12 次!</p>
+<p>兴奋的同时不要忘记思考：为什么会是 12 次呢？</p>
+<p>从 0 到 10 的结果各储存一遍，应该是 11 次呐？咦，那多出来的一次是从哪里来的？</p>
+<p>所以我们还需要认真看下我们的写法，在我们的写法中，其实我们用生成的 fibonacci 函数覆盖了原本了 fibonacci 函数，当我们执行 fibonacci(0) 时，执行一次函数，cache 为 {0: 0}，但是当我们执行 fibonacci(2) 的时候，执行 fibonacci(1) + fibonacci(0)，因为 fibonacci(0) 的值为 0，<code>!cache[address]</code> 的结果为 true，又会执行一次 fibonacci 函数。原来，多出来的那一次是在这里！</p>
+<h2 id="多说一句"><a href="#多说一句" class="headerlink" title="多说一句"></a>多说一句</h2><p>也许你会觉得在日常开发中又用不到 fibonacci，这个例子感觉实用价值不高呐，其实，这个例子是用来表明一种使用的场景，也就是如果需要大量重复的计算，或者大量计算又依赖于之前的结果，便可以考虑使用函数记忆。而这种场景，当你遇到的时候，你就会知道的。</p>
+<h2 id="专题系列"><a href="#专题系列" class="headerlink" title="专题系列"></a>专题系列</h2><p>JavaScript专题系列目录地址：<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog">https://github.com/mqyqingfeng/Blog</a>。</p>
+<p>JavaScript专题系列预计写二十篇左右，主要研究日常开发中一些功能点的实现，比如防抖、节流、去重、类型判断、拷贝、最值、扁平、柯里、递归、乱序、排序等，特点是研(chao)究(xi) underscore 和 jQuery 的实现方式。</p>
+<p>如果有错误或者不严谨的地方，请务必给予指正，十分感谢。如果喜欢或者有所启发，欢迎 star，对作者也是一种鼓励。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/11/JavaScript%E4%B8%93%E9%A2%98%E4%B9%8B%E5%87%BD%E6%95%B0%E8%AE%B0%E5%BF%86/" data-id="cm2n1iuti002n9sr3g2yb1uoa" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-JavaScript专题之跟着underscore学节流" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/11/JavaScript%E4%B8%93%E9%A2%98%E4%B9%8B%E8%B7%9F%E7%9D%80underscore%E5%AD%A6%E8%8A%82%E6%B5%81/" class="article-date">
+  <time class="dt-published" datetime="2024-10-11T00:29:57.686Z" itemprop="datePublished">2024-10-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript专题之跟着-underscore-学节流"><a href="#JavaScript专题之跟着-underscore-学节流" class="headerlink" title="JavaScript专题之跟着 underscore 学节流"></a>JavaScript专题之跟着 underscore 学节流</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/22">《JavaScript专题之跟着underscore学防抖》</a>中，我们了解了为什么要限制事件的频繁触发，以及如何做限制：</p>
+<ol>
+<li>debounce 防抖</li>
+<li>throttle 节流</li>
+</ol>
+<p>今天重点讲讲节流的实现。</p>
+<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p>节流的原理很简单：</p>
+<p>如果你持续触发事件，每隔一段时间，只执行一次事件。</p>
+<p>根据首次是否执行以及结束后是否执行，效果有所不同，实现的方式也有所不同。<br>我们用 leading 代表首次是否执行，trailing 代表结束后是否再执行一次。</p>
+<p>关于节流的实现，有两种主流的实现方式，一种是使用时间戳，一种是设置定时器。</p>
+<h2 id="使用时间戳"><a href="#使用时间戳" class="headerlink" title="使用时间戳"></a>使用时间戳</h2><p>让我们来看第一种方法：使用时间戳，当触发事件的时候，我们取出当前的时间戳，然后减去之前的时间戳(最一开始值设为 0 )，如果大于设置的时间周期，就执行函数，然后更新时间戳为当前的时间戳，如果小于，就不执行。</p>
+<p>看了这个表述，是不是感觉已经可以写出代码了…… 让我们来写第一版的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一版</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">throttle</span>(<span class="params">func, wait</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> context, args;</span><br><span class="line">    <span class="keyword">var</span> previous = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> now = +<span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">        context = <span class="variable language_">this</span>;</span><br><span class="line">        args = <span class="variable language_">arguments</span>;</span><br><span class="line">        <span class="keyword">if</span> (now - previous &gt; wait) &#123;</span><br><span class="line">            func.<span class="title function_">apply</span>(context, args);</span><br><span class="line">            previous = now;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例子依然是用讲 debounce 中的例子，如果你要使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">container.<span class="property">onmousemove</span> = <span class="title function_">throttle</span>(getUserAction, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<p>效果演示如下：</p>
+<p><img src="https://github.com/mqyqingfeng/Blog/raw/master/Images/throttle/throttle1.gif" alt="使用时间戳"></p>
+<p>我们可以看到：当鼠标移入的时候，事件立刻执行，每过 1s 会执行一次，如果在 4.2s 停止触发，以后不会再执行事件。</p>
+<h2 id="使用定时器"><a href="#使用定时器" class="headerlink" title="使用定时器"></a>使用定时器</h2><p>接下来，我们讲讲第二种实现方式，使用定时器。</p>
+<p>当触发事件的时候，我们设置一个定时器，再触发事件的时候，如果定时器存在，就不执行，直到定时器执行，然后执行函数，清空定时器，这样就可以设置下个定时器。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第二版</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">throttle</span>(<span class="params">func, wait</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> timeout;</span><br><span class="line">    <span class="keyword">var</span> previous = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        context = <span class="variable language_">this</span>;</span><br><span class="line">        args = <span class="variable language_">arguments</span>;</span><br><span class="line">        <span class="keyword">if</span> (!timeout) &#123;</span><br><span class="line">            timeout = <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">                timeout = <span class="literal">null</span>;</span><br><span class="line">                func.<span class="title function_">apply</span>(context, args)</span><br><span class="line">            &#125;, wait)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了让效果更加明显，我们设置 wait 的时间为 3s，效果演示如下：</p>
+<p><img src="https://github.com/mqyqingfeng/Blog/raw/master/Images/throttle/throttle2.gif" alt="使用定时器"></p>
+<p>我们可以看到：当鼠标移入的时候，事件不会立刻执行，晃了 3s 后终于执行了一次，此后每 3s 执行一次，当数字显示为 3 的时候，立刻移出鼠标，相当于大约 9.2s 的时候停止触发，但是依然会在第 12s 的时候执行一次事件。</p>
+<p>所以比较两个方法：</p>
+<ol>
+<li>第一种事件会立刻执行，第二种事件会在 n 秒后第一次执行</li>
+<li>第一种事件停止触发后没有办法再执行事件，第二种事件停止触发后依然会再执行一次事件</li>
+</ol>
+<h2 id="双剑合璧"><a href="#双剑合璧" class="headerlink" title="双剑合璧"></a>双剑合璧</h2><p>那我们想要一个什么样的呢？</p>
+<p>有人就说了：我想要一个有头有尾的！就是鼠标移入能立刻执行，停止触发的时候还能再执行一次！</p>
+<p>所以我们综合两者的优势，然后双剑合璧，写一版代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第三版</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">throttle</span>(<span class="params">func, wait</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> timeout, context, args, result;</span><br><span class="line">    <span class="keyword">var</span> previous = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> later = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        previous = +<span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">        timeout = <span class="literal">null</span>;</span><br><span class="line">        func.<span class="title function_">apply</span>(context, args)</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> throttled = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> now = +<span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">        <span class="comment">//下次触发 func 剩余的时间</span></span><br><span class="line">        <span class="keyword">var</span> remaining = wait - (now - previous);</span><br><span class="line">        context = <span class="variable language_">this</span>;</span><br><span class="line">        args = <span class="variable language_">arguments</span>;</span><br><span class="line">         <span class="comment">// 如果没有剩余的时间了或者你改了系统时间</span></span><br><span class="line">        <span class="keyword">if</span> (remaining &lt;= <span class="number">0</span> || remaining &gt; wait) &#123;</span><br><span class="line">            <span class="keyword">if</span> (timeout) &#123;</span><br><span class="line">                <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">                timeout = <span class="literal">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            previous = now;</span><br><span class="line">            func.<span class="title function_">apply</span>(context, args);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!timeout) &#123;</span><br><span class="line">            timeout = <span class="built_in">setTimeout</span>(later, remaining);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> throttled;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果演示如下：</p>
+<p><img src="https://github.com/mqyqingfeng/Blog/raw/master/Images/throttle/throttle3.gif" alt="throttle3"></p>
+<p>我们可以看到：鼠标移入，事件立刻执行，晃了 3s，事件再一次执行，当数字变成 3 的时候，也就是 6s 后，我们立刻移出鼠标，停止触发事件，9s 的时候，依然会再执行一次事件。</p>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>但是我有时也希望无头有尾，或者有头无尾，这个咋办？</p>
+<p>那我们设置个 options 作为第三个参数，然后根据传的值判断到底哪种效果，我们约定:</p>
+<p>leading：false 表示禁用第一次执行<br>trailing: false 表示禁用停止触发的回调</p>
+<p>我们来改一下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第四版</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">throttle</span>(<span class="params">func, wait, options</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> timeout, context, args, result;</span><br><span class="line">    <span class="keyword">var</span> previous = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (!options) options = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> later = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        previous = options.<span class="property">leading</span> === <span class="literal">false</span> ? <span class="number">0</span> : <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">getTime</span>();</span><br><span class="line">        timeout = <span class="literal">null</span>;</span><br><span class="line">        func.<span class="title function_">apply</span>(context, args);</span><br><span class="line">        <span class="keyword">if</span> (!timeout) context = args = <span class="literal">null</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> throttled = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> now = <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">getTime</span>();</span><br><span class="line">        <span class="keyword">if</span> (!previous &amp;&amp; options.<span class="property">leading</span> === <span class="literal">false</span>) previous = now;</span><br><span class="line">        <span class="keyword">var</span> remaining = wait - (now - previous);</span><br><span class="line">        context = <span class="variable language_">this</span>;</span><br><span class="line">        args = <span class="variable language_">arguments</span>;</span><br><span class="line">        <span class="keyword">if</span> (remaining &lt;= <span class="number">0</span> || remaining &gt; wait) &#123;</span><br><span class="line">            <span class="keyword">if</span> (timeout) &#123;</span><br><span class="line">                <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">                timeout = <span class="literal">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            previous = now;</span><br><span class="line">            func.<span class="title function_">apply</span>(context, args);</span><br><span class="line">            <span class="keyword">if</span> (!timeout) context = args = <span class="literal">null</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!timeout &amp;&amp; options.<span class="property">trailing</span> !== <span class="literal">false</span>) &#123;</span><br><span class="line">            timeout = <span class="built_in">setTimeout</span>(later, remaining);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> throttled;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="取消"><a href="#取消" class="headerlink" title="取消"></a>取消</h2><p>在 debounce 的实现中，我们加了一个 cancel 方法，throttle 我们也加个 cancel 方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第五版 非完整代码，完整代码请查看最后的演示代码链接</span></span><br><span class="line">...</span><br><span class="line">throttled.<span class="property">cancel</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">    previous = <span class="number">0</span>;</span><br><span class="line">    timeout = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>我们要注意 underscore 的实现中有这样一个问题：</p>
+<p>那就是 <code>leading：false</code> 和 <code>trailing: false</code> 不能同时设置。</p>
+<p>如果同时设置的话，比如当你将鼠标移出的时候，因为 trailing 设置为 false，停止触发的时候不会设置定时器，所以只要再过了设置的时间，再移入的话，就会立刻执行，就违反了 leading: false，bug 就出来了，所以，这个 throttle 只有三种用法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">container.<span class="property">onmousemove</span> = <span class="title function_">throttle</span>(getUserAction, <span class="number">1000</span>);</span><br><span class="line">container.<span class="property">onmousemove</span> = <span class="title function_">throttle</span>(getUserAction, <span class="number">1000</span>, &#123;</span><br><span class="line">    <span class="attr">leading</span>: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br><span class="line">container.<span class="property">onmousemove</span> = <span class="title function_">throttle</span>(getUserAction, <span class="number">1000</span>, &#123;</span><br><span class="line">    <span class="attr">trailing</span>: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>至此我们已经完整实现了一个 underscore 中的 throttle 函数，恭喜，撒花！</p>
+<h2 id="演示代码"><a href="#演示代码" class="headerlink" title="演示代码"></a>演示代码</h2><p>相关的代码可以在 <a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/tree/master/demos/throttle">Github 博客仓库</a> 中找到</p>
+<h2 id="专题系列"><a href="#专题系列" class="headerlink" title="专题系列"></a>专题系列</h2><p>JavaScript专题系列目录地址：<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog">https://github.com/mqyqingfeng/Blog</a>。</p>
+<p>JavaScript专题系列预计写二十篇左右，主要研究日常开发中一些功能点的实现，比如防抖、节流、去重、类型判断、拷贝、最值、扁平、柯里、递归、乱序、排序等，特点是研(chao)究(xi) underscore 和 jQuery 的实现方式。</p>
+<p>如果有错误或者不严谨的地方，请务必给予指正，十分感谢。如果喜欢或者有所启发，欢迎 star，对作者也是一种鼓励。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/11/JavaScript%E4%B8%93%E9%A2%98%E4%B9%8B%E8%B7%9F%E7%9D%80underscore%E5%AD%A6%E8%8A%82%E6%B5%81/" data-id="cm2n1iutn002y9sr3dc7cexkh" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-JavaScript专题之跟着underscore学防抖" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/11/JavaScript%E4%B8%93%E9%A2%98%E4%B9%8B%E8%B7%9F%E7%9D%80underscore%E5%AD%A6%E9%98%B2%E6%8A%96/" class="article-date">
+  <time class="dt-published" datetime="2024-10-11T00:29:57.667Z" itemprop="datePublished">2024-10-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript专题之跟着underscore学防抖"><a href="#JavaScript专题之跟着underscore学防抖" class="headerlink" title="JavaScript专题之跟着underscore学防抖"></a>JavaScript专题之跟着underscore学防抖</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在前端开发中会遇到一些频繁的事件触发，比如：</p>
+<ol>
+<li>window 的 resize、scroll</li>
+<li>mousedown、mousemove</li>
+<li>keyup、keydown<br>……</li>
+</ol>
+<p>为此，我们举个示例代码来了解事件如何频繁的触发：</p>
+<p>我们写个 <code>index.html</code> 文件：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;zh-cmn-Hans&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;x-ua-compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge, chrome=1&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>debounce<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#container</span>&#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">width</span>: <span class="number">100%</span>; <span class="attribute">height</span>: <span class="number">200px</span>; <span class="attribute">line-height</span>: <span class="number">200px</span>; <span class="attribute">text-align</span>: center; <span class="attribute">color</span>: <span class="number">#fff</span>; <span class="attribute">background-color</span>: <span class="number">#444</span>; <span class="attribute">font-size</span>: <span class="number">30px</span>;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;container&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;debounce.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>debounce.js</code> 文件的代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> container = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;container&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getUserAction</span>(<span class="params"></span>) &#123;</span><br><span class="line">    container.<span class="property">innerHTML</span> = count++;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">container.<span class="property">onmousemove</span> = getUserAction;</span><br></pre></td></tr></table></figure>
+
+<p>我们来看看效果：</p>
+<p><img src="https://github.com/mqyqingfeng/Blog/raw/master/Images/debounce/debounce.gif" alt="debounce"></p>
+<p>从左边滑到右边就触发了 165 次 getUserAction 函数！</p>
+<p>因为这个例子很简单，所以浏览器完全反应的过来，可是如果是复杂的回调函数或是 ajax 请求呢？假设 1 秒触发了 60 次，每个回调就必须在 1000 &#x2F; 60 &#x3D; 16.67ms 内完成，否则就会有卡顿出现。</p>
+<p>为了解决这个问题，一般有两种解决方案：</p>
+<ol>
+<li>debounce 防抖</li>
+<li>throttle 节流</li>
+</ol>
+<p>今天重点讲讲防抖的实现。</p>
+<h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>防抖的原理就是：你尽管触发事件，但是我一定在事件停止触发 n 秒后才执行。</p>
+<p>这意味着如果你在一个事件触发的 n 秒内又触发了这个事件，那我就以新的事件触发的时间为准，在此时间 n 秒后才执行。</p>
+<p>总之，就是要等你触发完事件 n 秒内不再触发事件，我才执行，真是任性呐!</p>
+<h2 id="第一版"><a href="#第一版" class="headerlink" title="第一版"></a>第一版</h2><p>根据这段表述，我们可以轻松写出第一版的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一版</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">debounce</span>(<span class="params">func, wait</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> timeout;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="built_in">clearTimeout</span>(timeout)</span><br><span class="line">        timeout = <span class="built_in">setTimeout</span>(func, wait);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果我们要使用它，以最一开始的例子为例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">container.<span class="property">onmousemove</span> = <span class="title function_">debounce</span>(getUserAction, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<p>现在随你怎么移动，反正你移动完 1000ms 内不再触发，我才执行事件。看看使用效果：</p>
+<p><img src="https://github.com/mqyqingfeng/Blog/raw/master/Images/debounce/debounce-1.gif" alt="debounce 第一版"></p>
+<p>顿时就从 165 次降低成了 1 次!</p>
+<p>棒棒哒，我们接着完善它。</p>
+<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><p>如果我们在 <code>getUserAction</code> 函数中 <code>console.log(this)</code>，在不使用 <code>debounce</code> 函数的时候，<code>this</code> 的值为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;container&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>但是如果使用我们的 debounce 函数，this 就会指向 Window 对象！</p>
+<p>所以我们需要将 this 指向正确的对象。</p>
+<p>我们修改下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第二版</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">debounce</span>(<span class="params">func, wait</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> timeout;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> context = <span class="variable language_">this</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">clearTimeout</span>(timeout)</span><br><span class="line">        timeout = <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">            func.<span class="title function_">apply</span>(context)</span><br><span class="line">        &#125;, wait);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在 this 已经可以正确指向了。让我们看下个问题：</p>
+<h2 id="event-对象"><a href="#event-对象" class="headerlink" title="event 对象"></a>event 对象</h2><p>JavaScript 在事件处理函数中会提供事件对象 event，我们修改下 getUserAction 函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getUserAction</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(e);</span><br><span class="line">    container.<span class="property">innerHTML</span> = count++;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如果我们不使用 debouce 函数，这里会打印 MouseEvent 对象，如图所示：</p>
+<p><img src="https://github.com/mqyqingfeng/Blog/raw/master/Images/debounce/event.png" alt="MouseEvent"></p>
+<p>但是在我们实现的 debounce 函数中，却只会打印 undefined!</p>
+<p>所以我们再修改一下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第三版</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">debounce</span>(<span class="params">func, wait</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> timeout;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> context = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="variable language_">arguments</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">clearTimeout</span>(timeout)</span><br><span class="line">        timeout = <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">            func.<span class="title function_">apply</span>(context, args)</span><br><span class="line">        &#125;, wait);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>到此为止，我们修复了两个小问题：</p>
+<ol>
+<li>this 指向</li>
+<li>event 对象</li>
+</ol>
+<h2 id="立刻执行"><a href="#立刻执行" class="headerlink" title="立刻执行"></a>立刻执行</h2><p>这个时候，代码已经很是完善了，但是为了让这个函数更加完善，我们接下来思考一个新的需求。</p>
+<p>这个需求就是：</p>
+<p>我不希望非要等到事件停止触发后才执行，我希望立刻执行函数，然后等到停止触发 n 秒后，才可以重新触发执行。</p>
+<p>想想这个需求也是很有道理的嘛，那我们加个 immediate 参数判断是否是立刻执行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第四版</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">debounce</span>(<span class="params">func, wait, immediate</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> timeout, result;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> context = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="variable language_">arguments</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (timeout) <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">        <span class="keyword">if</span> (immediate) &#123;</span><br><span class="line">            <span class="comment">// 如果已经执行过，不再执行</span></span><br><span class="line">            <span class="keyword">var</span> callNow = !timeout;</span><br><span class="line">            timeout = <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">                timeout = <span class="literal">null</span>;</span><br><span class="line">            &#125;, wait)</span><br><span class="line">            <span class="keyword">if</span> (callNow) func.<span class="title function_">apply</span>(context, args)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            timeout = <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">                func.<span class="title function_">apply</span>(context, args)</span><br><span class="line">            &#125;, wait);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再来看看使用效果：</p>
+<p><img src="https://github.com/mqyqingfeng/Blog/raw/master/Images/debounce/debounce-4.gif" alt="debounce 第四版"></p>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>此时注意一点，就是 getUserAction 函数可能是有返回值的，所以我们也要返回函数的执行结果，但是当 immediate 为 false 的时候，因为使用了 setTimeout ，我们将 func.apply(context, args) 的返回值赋给变量，最后再 return 的时候，值将会一直是 undefined，所以我们只在 immediate 为 true 的时候返回函数的执行结果。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第五版</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">debounce</span>(<span class="params">func, wait, immediate</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> timeout, result;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> context = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="variable language_">arguments</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (timeout) <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">        <span class="keyword">if</span> (immediate) &#123;</span><br><span class="line">            <span class="comment">// 如果已经执行过，不再执行</span></span><br><span class="line">            <span class="keyword">var</span> callNow = !timeout;</span><br><span class="line">            timeout = <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">                timeout = <span class="literal">null</span>;</span><br><span class="line">            &#125;, wait)</span><br><span class="line">            <span class="keyword">if</span> (callNow) result = func.<span class="title function_">apply</span>(context, args)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            timeout = <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">                func.<span class="title function_">apply</span>(context, args)</span><br><span class="line">            &#125;, wait);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="取消"><a href="#取消" class="headerlink" title="取消"></a>取消</h2><p>最后我们再思考一个小需求，我希望能取消 debounce 函数，比如说我 debounce 的时间间隔是 10 秒钟，immediate 为 true，这样的话，我只有等 10 秒后才能重新触发事件，现在我希望有一个按钮，点击后，取消防抖，这样我再去触发，就可以又立刻执行啦，是不是很开心？</p>
+<p>为了这个需求，我们写最后一版的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第六版</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">debounce</span>(<span class="params">func, wait, immediate</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> timeout, result;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> debounced = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> context = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="variable language_">arguments</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (timeout) <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">        <span class="keyword">if</span> (immediate) &#123;</span><br><span class="line">            <span class="comment">// 如果已经执行过，不再执行</span></span><br><span class="line">            <span class="keyword">var</span> callNow = !timeout;</span><br><span class="line">            timeout = <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">                timeout = <span class="literal">null</span>;</span><br><span class="line">            &#125;, wait)</span><br><span class="line">            <span class="keyword">if</span> (callNow) result = func.<span class="title function_">apply</span>(context, args)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            timeout = <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">                func.<span class="title function_">apply</span>(context, args)</span><br><span class="line">            &#125;, wait);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    debounced.<span class="property">cancel</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">        timeout = <span class="literal">null</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> debounced;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么该如何使用这个 cancel 函数呢？依然是以上面的 demo 为例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> container = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;container&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getUserAction</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    container.<span class="property">innerHTML</span> = count++;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> setUseAction = <span class="title function_">debounce</span>(getUserAction, <span class="number">10000</span>, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">container.<span class="property">onmousemove</span> = setUseAction;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;button&quot;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    setUseAction.<span class="title function_">cancel</span>();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>演示效果如下：</p>
+<p><img src="https://raw.githubusercontent.com/mqyqingfeng/Blog/master/Images/debounce/debounce-cancel.gif" alt="debounce-cancel"></p>
+<p>至此我们已经完整实现了一个 underscore 中的 debounce 函数，恭喜，撒花！</p>
+<h2 id="演示代码"><a href="#演示代码" class="headerlink" title="演示代码"></a>演示代码</h2><p>相关的代码可以在 <a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/tree/master/demos/debounce">Github 博客仓库</a> 中找到</p>
+<h2 id="专题系列"><a href="#专题系列" class="headerlink" title="专题系列"></a>专题系列</h2><p>JavaScript专题系列目录地址：<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog">https://github.com/mqyqingfeng/Blog</a>。</p>
+<p>JavaScript专题系列预计写二十篇左右，主要研究日常开发中一些功能点的实现，比如防抖、节流、去重、类型判断、拷贝、最值、扁平、柯里、递归、乱序、排序等，特点是研(chao)究(xi) underscore 和 jQuery 的实现方式。</p>
+<p>如果有错误或者不严谨的地方，请务必给予指正，十分感谢。如果喜欢或者有所启发，欢迎 star，对作者也是一种鼓励。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/11/JavaScript%E4%B8%93%E9%A2%98%E4%B9%8B%E8%B7%9F%E7%9D%80underscore%E5%AD%A6%E9%98%B2%E6%8A%96/" data-id="cm2n1iutn002z9sr3c8ozhisf" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-JavaScript专题之惰性函数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/11/JavaScript%E4%B8%93%E9%A2%98%E4%B9%8B%E6%83%B0%E6%80%A7%E5%87%BD%E6%95%B0/" class="article-date">
+  <time class="dt-published" datetime="2024-10-11T00:29:57.418Z" itemprop="datePublished">2024-10-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript专题之惰性函数"><a href="#JavaScript专题之惰性函数" class="headerlink" title="JavaScript专题之惰性函数"></a>JavaScript专题之惰性函数</h1><h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>我们现在需要写一个 foo 函数，这个函数返回首次调用时的 Date 对象，注意是首次。</p>
+<h2 id="解决一：普通方法"><a href="#解决一：普通方法" class="headerlink" title="解决一：普通方法"></a>解决一：普通方法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> t;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (t) <span class="keyword">return</span> t;</span><br><span class="line">    t = <span class="keyword">new</span> <span class="title class_">Date</span>()</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>问题有两个，一是污染了全局变量，二是每次调用 foo 的时候都需要进行一次判断。</p>
+<h2 id="解决二：闭包"><a href="#解决二：闭包" class="headerlink" title="解决二：闭包"></a>解决二：闭包</h2><p>我们很容易想到用闭包避免污染全局变量。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = (<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> t;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (t) <span class="keyword">return</span> t;</span><br><span class="line">        t = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>然而还是没有解决调用时都必须进行一次判断的问题。</p>
+<h2 id="解决三：函数对象"><a href="#解决三：函数对象" class="headerlink" title="解决三：函数对象"></a>解决三：函数对象</h2><p>函数也是一种对象，利用这个特性，我们也可以解决这个问题。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (foo.<span class="property">t</span>) <span class="keyword">return</span> foo.<span class="property">t</span>;</span><br><span class="line">    foo.<span class="property">t</span> = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">    <span class="keyword">return</span> foo.<span class="property">t</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>依旧没有解决调用时都必须进行一次判断的问题。</p>
+<h2 id="解决四：惰性函数"><a href="#解决四：惰性函数" class="headerlink" title="解决四：惰性函数"></a>解决四：惰性函数</h2><p>不错，惰性函数就是解决每次都要进行判断的这个问题，解决原理很简单，重写函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> t = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">    foo = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">foo</span>();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="更多应用"><a href="#更多应用" class="headerlink" title="更多应用"></a>更多应用</h2><p>DOM 事件添加中，为了兼容现代浏览器和 IE 浏览器，我们需要对浏览器环境进行一次判断：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简化写法</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">addEvent</span> (<span class="params">type, el, fn</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">addEventListener</span>) &#123;</span><br><span class="line">        el.<span class="title function_">addEventListener</span>(type, fn, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(<span class="variable language_">window</span>.<span class="property">attachEvent</span>)&#123;</span><br><span class="line">        el.<span class="title function_">attachEvent</span>(<span class="string">&#x27;on&#x27;</span> + type, fn);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>问题在于我们每当使用一次 addEvent 时都会进行一次判断。</p>
+<p>利用惰性函数，我们可以这样做：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">addEvent</span> (<span class="params">type, el, fn</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">addEventListener</span>) &#123;</span><br><span class="line">        addEvent = <span class="keyword">function</span> (<span class="params">type, el, fn</span>) &#123;</span><br><span class="line">            el.<span class="title function_">addEventListener</span>(type, fn, <span class="literal">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(<span class="variable language_">window</span>.<span class="property">attachEvent</span>)&#123;</span><br><span class="line">        addEvent = <span class="keyword">function</span> (<span class="params">type, el, fn</span>) &#123;</span><br><span class="line">            el.<span class="title function_">attachEvent</span>(<span class="string">&#x27;on&#x27;</span> + type, fn);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然我们也可以使用闭包的形式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> addEvent = (<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">addEventListener</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">type, el, fn</span>) &#123;</span><br><span class="line">            el.<span class="title function_">addEventListener</span>(type, fn, <span class="literal">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(<span class="variable language_">window</span>.<span class="property">attachEvent</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">type, el, fn</span>) &#123;</span><br><span class="line">            el.<span class="title function_">attachEvent</span>(<span class="string">&#x27;on&#x27;</span> + type, fn);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>当我们每次都需要进行条件判断，其实只需要判断一次，接下来的使用方式都不会发生改变的时候，想想是否可以考虑使用惰性函数。</p>
+<h2 id="重要参考"><a href="#重要参考" class="headerlink" title="重要参考"></a>重要参考</h2><p><a target="_blank" rel="noopener" href="http://peter.michaux.ca/articles/lazy-function-definition-pattern">Lazy Function Definition Pattern</a></p>
+<h2 id="专题系列"><a href="#专题系列" class="headerlink" title="专题系列"></a>专题系列</h2><p>JavaScript专题系列目录地址：<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog">https://github.com/mqyqingfeng/Blog</a>。</p>
+<p>JavaScript专题系列预计写二十篇左右，主要研究日常开发中一些功能点的实现，比如防抖、节流、去重、类型判断、拷贝、最值、扁平、柯里、递归、乱序、排序等，特点是研(chao)究(xi) underscore 和 jQuery 的实现方式。</p>
+<p>如果有错误或者不严谨的地方，请务必给予指正，十分感谢。如果喜欢或者有所启发，欢迎 star，对作者也是一种鼓励。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/11/JavaScript%E4%B8%93%E9%A2%98%E4%B9%8B%E6%83%B0%E6%80%A7%E5%87%BD%E6%95%B0/" data-id="cm2n1iutk002r9sr323c76vc7" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-JavaScript专题之递归" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/11/JavaScript%E4%B8%93%E9%A2%98%E4%B9%8B%E9%80%92%E5%BD%92/" class="article-date">
+  <time class="dt-published" datetime="2024-10-11T00:29:57.155Z" itemprop="datePublished">2024-10-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript专题之递归"><a href="#JavaScript专题之递归" class="headerlink" title="JavaScript专题之递归"></a>JavaScript专题之递归</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>程序调用自身的编程技巧称为递归(recursion)。</p>
+<h2 id="阶乘"><a href="#阶乘" class="headerlink" title="阶乘"></a>阶乘</h2><p>以阶乘为例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">factorial</span>(<span class="params">n</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">    <span class="keyword">return</span> n * <span class="title function_">factorial</span>(n - <span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">factorial</span>(<span class="number">5</span>)) <span class="comment">// 5 * 4 * 3 * 2 * 1 = 120</span></span><br></pre></td></tr></table></figure>
+
+<p>示意图(图片来自 <a href="wwww.penjee.com">wwww.penjee.com</a>)：</p>
+<p><img src="https://github.com/mqyqingfeng/Blog/raw/master/Images/recursion/factorial.gif" alt="阶乘"></p>
+<h2 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h2><p>在<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/46">《JavaScript专题之函数记忆》</a>中讲到过的斐波那契数列也使用了递归：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fibonacci</span>(<span class="params">n</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> n &lt; <span class="number">2</span> ? n : <span class="title function_">fibonacci</span>(n - <span class="number">1</span>) + <span class="title function_">fibonacci</span>(n - <span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">fibonacci</span>(<span class="number">5</span>)) <span class="comment">// 1 1 2 3 5</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="递归条件"><a href="#递归条件" class="headerlink" title="递归条件"></a>递归条件</h2><p>从这两个例子中，我们可以看出：</p>
+<p>构成递归需具备边界条件、递归前进段和递归返回段，当边界条件不满足时，递归前进，当边界条件满足时，递归返回。阶乘中的 <code>n == 1</code> 和 斐波那契数列中的 <code>n &lt; 2</code> 都是边界条件。</p>
+<p>总结一下递归的特点：</p>
+<ol>
+<li>子问题须与原始问题为同样的事，且更为简单；</li>
+<li>不能无限制地调用本身，须有个出口，化简为非递归状况处理。</li>
+</ol>
+<p>了解这些特点可以帮助我们更好的编写递归函数。</p>
+<h2 id="执行上下文栈"><a href="#执行上下文栈" class="headerlink" title="执行上下文栈"></a>执行上下文栈</h2><p>在<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/4">《JavaScript深入之执行上下文栈》</a>中，我们知道：</p>
+<p>当执行一个函数的时候，就会创建一个执行上下文，并且压入执行上下文栈，当函数执行完毕的时候，就会将函数的执行上下文从栈中弹出。</p>
+<p>试着对阶乘函数分析执行的过程，我们会发现，JavaScript 会不停的创建执行上下文压入执行上下文栈，对于内存而言，维护这么多的执行上下文也是一笔不小的开销呐！那么，我们该如何优化呢？</p>
+<p>答案就是尾调用。</p>
+<h2 id="尾调用"><a href="#尾调用" class="headerlink" title="尾调用"></a>尾调用</h2><p>尾调用，是指函数内部的最后一个动作是函数调用。该调用的返回值，直接返回给函数。</p>
+<p>举个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 尾调用</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">f</span>(<span class="params">x</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">g</span>(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然而</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 非尾调用</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">f</span>(<span class="params">x</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">g</span>(x) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>并不是尾调用，因为 g(x) 的返回值还需要跟 1 进行计算后，f(x)才会返回值。</p>
+<p>两者又有什么区别呢？答案就是执行上下文栈的变化不一样。</p>
+<p>为了模拟执行上下文栈的行为，让我们定义执行上下文栈是一个数组：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ECStack</span> = [];</span><br></pre></td></tr></table></figure>
+
+<p>我们模拟下第一个尾调用函数执行时的执行上下文栈变化：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">push</span>(&lt;f&gt; functionContext);</span><br><span class="line"></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">pop</span>();</span><br><span class="line"></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">push</span>(&lt;g&gt; functionContext);</span><br><span class="line"></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">pop</span>();</span><br></pre></td></tr></table></figure>
+
+<p>我们再来模拟一下第二个非尾调用函数执行时的执行上下文栈变化：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">push</span>(&lt;f&gt; functionContext);</span><br><span class="line"></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">push</span>(&lt;g&gt; functionContext);</span><br><span class="line"></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">pop</span>();</span><br><span class="line"></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">pop</span>();</span><br></pre></td></tr></table></figure>
+
+<p>也就说尾调用函数执行时，虽然也调用了一个函数，但是因为原来的的函数执行完毕，执行上下文会被弹出，执行上下文栈中相当于只多压入了一个执行上下文。然而非尾调用函数，就会创建多个执行上下文压入执行上下文栈。</p>
+<p>函数调用自身，称为递归。如果尾调用自身，就称为尾递归。</p>
+<p>所以我们只用把阶乘函数改造成一个尾递归形式，就可以避免创建那么多的执行上下文。但是我们该怎么做呢？</p>
+<h2 id="阶乘函数优化"><a href="#阶乘函数优化" class="headerlink" title="阶乘函数优化"></a>阶乘函数优化</h2><p>我们需要做的就是把所有用到的内部变量改写成函数的参数，以阶乘函数为例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">factorial</span>(<span class="params">n, res</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> res;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">factorial2</span>(n - <span class="number">1</span>, n * res)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">factorial</span>(<span class="number">4</span>, <span class="number">1</span>)) <span class="comment">// 24</span></span><br></pre></td></tr></table></figure>
+
+<p>然而这个很奇怪呐……我们计算 4 的阶乘，结果函数要传入 4 和 1，我就不能只传入一个 4 吗？</p>
+<p>这个时候就要用到我们在<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/42">《JavaScript专题之柯里化》</a>中编写的 curry 函数了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newFactorial = <span class="title function_">curry</span>(factorial, _, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="title function_">newFactorial</span>(<span class="number">5</span>) <span class="comment">// 24</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>如果你看过 <a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog">JavaScript 专题系列</a>的文章，你会发现递归有着很多的应用。</p>
+<p>作为专题系列的第十八篇，我们来盘点下之前的文章中都有哪些涉及到了递归：</p>
+<p>1.<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/36">《JavaScript 专题之数组扁平化》</a>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">flatten</span>(<span class="params">arr</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> arr.<span class="title function_">reduce</span>(<span class="keyword">function</span>(<span class="params">prev, next</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> prev.<span class="title function_">concat</span>(<span class="title class_">Array</span>.<span class="title function_">isArray</span>(next) ? <span class="title function_">flatten</span>(next) : next)</span><br><span class="line">    &#125;, [])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/32">《JavaScript 专题之深浅拷贝》</a>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> deepCopy = <span class="keyword">function</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> obj !== <span class="string">&#x27;object&#x27;</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">var</span> newObj = obj <span class="keyword">instanceof</span> <span class="title class_">Array</span> ? [] : &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">        <span class="keyword">if</span> (obj.<span class="title function_">hasOwnProperty</span>(key)) &#123;</span><br><span class="line">            newObj[key] = <span class="keyword">typeof</span> obj[key] === <span class="string">&#x27;object&#x27;</span> ? <span class="title function_">deepCopy</span>(obj[key]) : obj[key];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> newObj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/33">JavaScript 专题之从零实现 jQuery 的 extend</a>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 非完整版本，完整版本请点击查看具体的文章</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">extend</span>(<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 循环遍历要复制的对象们</span></span><br><span class="line">    <span class="keyword">for</span> (; i &lt; length; i++) &#123;</span><br><span class="line">        <span class="comment">// 获取当前对象</span></span><br><span class="line">        options = <span class="variable language_">arguments</span>[i];</span><br><span class="line">        <span class="comment">// 要求不能为空 避免extend(a,,b)这种情况</span></span><br><span class="line">        <span class="keyword">if</span> (options != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (name <span class="keyword">in</span> options) &#123;</span><br><span class="line">                <span class="comment">// 目标属性值</span></span><br><span class="line">                src = target[name];</span><br><span class="line">                <span class="comment">// 要复制的对象的属性值</span></span><br><span class="line">                copy = options[name];</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (deep &amp;&amp; copy &amp;&amp; <span class="keyword">typeof</span> copy == <span class="string">&#x27;object&#x27;</span>) &#123;</span><br><span class="line">                    <span class="comment">// 递归调用</span></span><br><span class="line">                    target[name] = <span class="title function_">extend</span>(deep, src, copy);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (copy !== <span class="literal">undefined</span>)&#123;</span><br><span class="line">                    target[name] = copy;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>4.<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/41">《JavaScript 专题之如何判断两个对象相等》</a>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 非完整版本，完整版本请点击查看具体的文章</span></span><br><span class="line"><span class="comment">// 属于间接调用</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">eq</span>(<span class="params">a, b, aStack, bStack</span>) &#123;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更复杂的对象使用 deepEq 函数进行深度比较</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">deepEq</span>(a, b, aStack, bStack);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">deepEq</span>(<span class="params">a, b, aStack, bStack</span>) &#123;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数组判断</span></span><br><span class="line">    <span class="keyword">if</span> (areArrays) &#123;</span><br><span class="line"></span><br><span class="line">        length = a.<span class="property">length</span>;</span><br><span class="line">        <span class="keyword">if</span> (length !== b.<span class="property">length</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (length--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!<span class="title function_">eq</span>(a[length], b[length], aStack, bStack)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 对象判断</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> keys = <span class="title class_">Object</span>.<span class="title function_">keys</span>(a),</span><br><span class="line">            key;</span><br><span class="line">        length = keys.<span class="property">length</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="title class_">Object</span>.<span class="title function_">keys</span>(b).<span class="property">length</span> !== length) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">while</span> (length--) &#123;</span><br><span class="line"></span><br><span class="line">            key = keys[length];</span><br><span class="line">            <span class="keyword">if</span> (!(b.<span class="title function_">hasOwnProperty</span>(key) &amp;&amp; <span class="title function_">eq</span>(a[key], b[key], aStack, bStack))) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5.<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/42">《JavaScript 专题之函数柯里化》</a>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 非完整版本，完整版本请点击查看具体的文章</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">curry</span>(<span class="params">fn, args</span>) &#123;</span><br><span class="line">    length = fn.<span class="property">length</span>;</span><br><span class="line"></span><br><span class="line">    args = args || [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> _args = args.<span class="title function_">slice</span>(<span class="number">0</span>),</span><br><span class="line"></span><br><span class="line">            arg, i;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="variable language_">arguments</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line"></span><br><span class="line">            arg = <span class="variable language_">arguments</span>[i];</span><br><span class="line"></span><br><span class="line">            _args.<span class="title function_">push</span>(arg);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (_args.<span class="property">length</span> &lt; length) &#123;</span><br><span class="line">            <span class="keyword">return</span> curry.<span class="title function_">call</span>(<span class="variable language_">this</span>, fn, _args);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> fn.<span class="title function_">apply</span>(<span class="variable language_">this</span>, _args);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>递归的内容远不止这些，比如还有汉诺塔、二叉树遍历等递归场景，本篇就不过多展开，真希望未来能写个算法系列。</p>
+<h2 id="专题系列"><a href="#专题系列" class="headerlink" title="专题系列"></a>专题系列</h2><p>JavaScript专题系列目录地址：<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog">https://github.com/mqyqingfeng/Blog</a>。</p>
+<p>JavaScript专题系列预计写二十篇左右，主要研究日常开发中一些功能点的实现，比如防抖、节流、去重、类型判断、拷贝、最值、扁平、柯里、递归、乱序、排序等，特点是研(chao)究(xi) underscore 和 jQuery 的实现方式。</p>
+<p>如果有错误或者不严谨的地方，请务必给予指正，十分感谢。如果喜欢或者有所启发，欢迎 star，对作者也是一种鼓励。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/11/JavaScript%E4%B8%93%E9%A2%98%E4%B9%8B%E9%80%92%E5%BD%92/" data-id="cm2n1iutn00309sr32q454xv6" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8AES6-%E6%95%99%E7%A8%8B%E3%80%8B%E7%AC%94%E8%AE%B0/">《ES6 教程》笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8AJavaScript%E6%95%99%E7%A8%8B%E3%80%8B%E7%AC%94%E8%AE%B0/">《JavaScript教程》笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/10/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bnew%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bcall%E5%92%8Capply%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8Bbind%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/11/JavaScript%E6%B7%B1%E5%85%A5%E4%B9%8B%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
